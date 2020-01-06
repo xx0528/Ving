@@ -18,7 +18,7 @@ import 'view_model/theme_model.dart';
 
 
 void main() async {
-  IjkConfig.isLog = true;
+  IjkConfig.isLog = false;
   Provider.debugCheckInvalidValueType = null;
 
   /// 全局屏幕适配方案

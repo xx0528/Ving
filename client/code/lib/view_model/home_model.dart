@@ -30,6 +30,7 @@ class HomeModel extends ViewStateRefreshListModel {
       LogUtil.e(_videos);
       return result[2];
     } else {
+      LogUtil.e("resuolt 0-------------");
       return result[0];
     }
 

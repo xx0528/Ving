@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/b3log/gulu"
+	"github.com/88250/gulu"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"

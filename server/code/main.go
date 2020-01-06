@@ -5,13 +5,14 @@ import (
 	"server/i18n"
 	"server/model"
 	"server/service"
+	"server/theme"
 	"io"
 	"math/rand"
 	"net/http"
 	"os"
 	"time"
 
-	"github.com/b3log/gulu"
+	"github.com/88250/gulu"
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,6 +27,7 @@ func init() {
 
 	model.LoadConf()
 	i18n.Load()
+	theme.Load()
 	replaceServerConf()
 	if "dev" == model.Conf.RuntimeMode {
 		gin.SetMode(gin.DebugMode)
@@ -60,21 +62,21 @@ func main() {
 
 // handleSignal handles system signal for graceful shutdown.
 func handleSignal(server *http.Server) {
-	// c := make(chan os.Signal)
-	// signal.Notify(c, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)
+	c := make(chan os.Signal)
+	signal.Notify(c, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)
 
-	// go func() {
-	// 	s := <-c
-	// 	logger.Infof("got signal [%s], exiting pipe now", s)
-	// 	if err := server.Close(); nil != err {
-	// 		logger.Errorf("server close failed: " + err.Error())
-	// 	}
+	go func() {
+		s := <-c
+		logger.Infof("got signal [%s], exiting pipe now", s)
+		if err := server.Close(); nil != err {
+			logger.Errorf("server close failed: " + err.Error())
+		}
 
-	// 	service.DisconnectDB()
+		service.DisconnectDB()
 
-	// 	logger.Infof("Pipe exited")
-	// 	os.Exit(0)
-	// }()
+		logger.Infof("Pipe exited")
+		os.Exit(0)
+	}()
 }
 
 func replaceServerConf() {

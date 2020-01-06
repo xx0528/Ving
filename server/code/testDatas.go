@@ -10,7 +10,7 @@ import (
 	"server/service"
 	"time"
 
-	"github.com/b3log/gulu"
+	"github.com/88250/gulu"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

@@ -6,7 +6,7 @@ package theme
 import (
 	"os"
 
-	"github.com/b3log/gulu"
+	"github.com/88250/gulu"
 )
 
 // Logger
