@@ -56,14 +56,30 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 	})
 	// ret.Use(sessions.Sessions("movie", store))
 
+	commonHandler := api.CommonAPI{DB: db}
 	userHandler := api.UserAPI{DB: db}
 	postHandler := api.PostAPI{DB: db}
 	
-	postApi := ret.Group(util.PathAPI)
+	postC := ret.Group(util.PathAPI)
 	{
-		postApi.POST("/logout", logoutAction)
-		postApi.GET("/status", getStatusAction)
-		postApi.GET("/index", getIndex)
+		//首页精选 /api/v2/home?
+		postC.GET("/home", commonHandler.GetHome)
+		//相关视频 api/v4/video/related?id=xxx
+		postC.GET("/video", commonHandler.GetVideo)
+		//获取分类 api/v4/categories
+		postC.GET("/categories", commonHandler.GetCategories)
+		//获取分类详情List api/v4/categories/videoList?id=xxx&udid=xxx
+		postC.GET("/categories/video", commonHandler.GetVideoDetail)
+		//获取排行榜的 api/v4/rankList
+		postC.GET("/rankList", commonHandler.GetRank)
+		//获取搜索信息 api/v1/search?&num=10&start=10&query=xxx
+		postC.GET("/search", commonHandler.GetSearch)
+		//热门搜索关键词 api/v3/queries/hot
+		postC.GET("/queries/hot", commonHandler.GetHot)
+		//关注 api/v4/tabs/follow
+		postC.GET("/tabs/follow", commonHandler.GetFollow)
+		//作者信息 api/v4/pgcs/detail/tab?id=571
+		postC.GET("/pgcs/detail", commonHandler.GetAuthor)
 	}
 	
 	postU := ret.Group("/users")

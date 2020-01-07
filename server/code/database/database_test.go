@@ -15,7 +15,7 @@ func TestDatabaseSuite(t *testing.T) {
 
 type DatabaseSuite struct {
 	suite.Suite
-	db *TenDatabase
+	db *MovieDatabase
 }
 
 func (s *DatabaseSuite) BeforeTest(suiteName, testName string) {
