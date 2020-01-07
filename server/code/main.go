@@ -4,7 +4,7 @@ import (
 	"server/controller"
 	"server/i18n"
 	"server/model"
-	"server/service"
+	"server/database"
 	"server/theme"
 	"io"
 	"math/rand"
@@ -39,7 +39,7 @@ func init() {
 }
 
 func main() {
-	db, err := service.ConnectDB(model.Conf.MongoConnect, model.Conf.MongoDBName)
+	db, err := database.ConnectDB(model.Conf.MongoConnect, model.Conf.MongoDBName)
 
 	if err != nil {
 		logger.Error("连接数据库失败")
@@ -47,7 +47,7 @@ func main() {
 	}
 	defer db.Close()
 
-	router := controller.MapRoutes()
+	router := controller.MapRoutes(db)
 	server := &http.Server{
 		Addr:    "0.0.0.0:" + model.Conf.Port,
 		Handler: router,
@@ -73,7 +73,7 @@ func main() {
 // 			logger.Errorf("server close failed: " + err.Error())
 // 		}
 
-// 		service.Close()
+// 		database.Close()
 
 // 		logger.Infof("Pipe exited")
 // 		os.Exit(0)
