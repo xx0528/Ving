@@ -1,1 +1,1 @@
-go run main.go --show_cfg=true
+./server.exe --show_cfg=true

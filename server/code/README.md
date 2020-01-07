@@ -34,7 +34,7 @@
 		volumes:
 		  - ./data/db:/data/db
 		ports:
-		  - 38128:27017
+		  - 27017:27017
 		environment:
 		  MONGO_INITDB_ROOT_USERNAME: root
 		  MONGO_INITDB_ROOT_PASSWORD: 123456

@@ -28,6 +28,7 @@
 bash 命令
 
 `docker run -dit ubuntu:latest` 在后台运行容器 用docker logs xxx 查看日志
+`docker ps -a` 查看所有容器 包括stop的
 进入容器 `docker attach` 命令或 `docker exec` 命令
 用attach进入容器后 exit会终止容器运行 用exec配合-it进入后 exit会退出容器 不会终止容器
 推荐用exec进入容器

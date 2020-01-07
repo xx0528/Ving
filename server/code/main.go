@@ -21,14 +21,15 @@ var logger *gulu.Logger
 
 func init() {
 	rand.Seed(time.Now().UTC().UnixNano())
-
 	gulu.Log.SetLevel("info")
+
 	logger = gulu.Log.NewLogger(os.Stdout)
 
 	model.LoadConf()
 	i18n.Load()
 	theme.Load()
 	replaceServerConf()
+	
 	if "dev" == model.Conf.RuntimeMode {
 		gin.SetMode(gin.DebugMode)
 	} else {
@@ -52,7 +53,7 @@ func main() {
 		Handler: router,
 	}
 
-	handleSignal(server)
+	// handleSignal(server)
 
 	logger.Infof("Server (v%s) is running [%s]", model.Version, model.Conf.Server)
 	if err := server.ListenAndServe(); nil != err {
@@ -61,23 +62,23 @@ func main() {
 }
 
 // handleSignal handles system signal for graceful shutdown.
-func handleSignal(server *http.Server) {
-	c := make(chan os.Signal)
-	signal.Notify(c, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)
+// func handleSignal(server *http.Server) {
+// 	c := make(chan os.Signal)
+// 	signal.Notify(c, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)
 
-	go func() {
-		s := <-c
-		logger.Infof("got signal [%s], exiting pipe now", s)
-		if err := server.Close(); nil != err {
-			logger.Errorf("server close failed: " + err.Error())
-		}
+// 	go func() {
+// 		s := <-c
+// 		logger.Infof("got signal [%s], exiting pipe now", s)
+// 		if err := server.Close(); nil != err {
+// 			logger.Errorf("server close failed: " + err.Error())
+// 		}
 
-		service.DisconnectDB()
+// 		service.Close()
 
-		logger.Infof("Pipe exited")
-		os.Exit(0)
-	}()
-}
+// 		logger.Infof("Pipe exited")
+// 		os.Exit(0)
+// 	}()
+// }
 
 func replaceServerConf() {
 	// path := "theme/sw.min.js.tpl"
