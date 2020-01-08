@@ -1,36 +1,23 @@
-package main
+package test
 
 import (
 	"context"
 	"fmt"
 	"math/rand"
+	"testing"
 	"os"
 	"server/i18n"
 	"server/model"
-	"server/service"
+	"server/database"
 	"time"
-
-	"github.com/88250/gulu"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// Logger
-var logger *gulu.Logger
+func TestInsertMovie(t *testing.T) {
 
-func init() {
-	rand.Seed(time.Now().UTC().UnixNano())
-
-	gulu.Log.SetLevel("info")
-	logger = gulu.Log.NewLogger(os.Stdout)
-
-	model.LoadConf()
-	i18n.Load()
-}
-
-func main() {
 	var (
 		err           error
 		collection    *mongo.Collection
@@ -39,14 +26,18 @@ func main() {
 		usersArray    = GetUserInfoArray()
 	)
 
-	db, err := service.ConnectDB(model.Conf.MongoConnect, model.Conf.MongoDBName)
+	rand.Seed(time.Now().UTC().UnixNano())
+
+	i18n.Load()
+
+	db, err := database.ConnectDB("mongodb://root:123456@127.0.0.1:27017/admin", "Movie")
 
 	if err != nil {
-		logger.Error("连接数据库失败")
+		t.Log("连接数据库失败")
 		panic(err)
 	}
 	defer db.Close()
-	logger.Info("数据库连接成功")
+	t.Log("数据库连接成功")
 
 	collection = db.DB.Collection("Movie")
 	//插入一条数据
@@ -91,7 +82,6 @@ func GetUserInfoArray() (data []interface{}) {
 		data = append(data, model.User{
 			ID:       primitive.NewObjectID(),
 			Name:     fmt.Sprintf("testName_%d", i+1),
-			UserName: fmt.Sprintf("testUserName_%d", i+1),
 			Email:    fmt.Sprintf("1235_%d@gmail.com", i+1),
 			Phone:    fmt.Sprintf("18821231%d", i+1),
 			Website:  fmt.Sprintf("www.baidu.com"),

@@ -13,7 +13,7 @@ type Video struct {
 	UserName   string             `bson:"username" json:"username"`     //用户昵称
 	Desc       string             `bson:"desc" json:"desc"`             //视频描述
 	VideoURL   string             `bson:"videourl" json:"videourl"`     //视频地址
-	Tag        string             `bson:"tag" json:"tag"`               //视频分类标签
+	Tags       string             `bson:"tags" json:"tags"`             //视频分类标签
 	Praises    int64              `bson:"praises" json:"praises"`       //👍点赞数量
 	Treads     int64              `bson:"treads" json:"treads"`         //👎踩数量
 	Comments   int64              `bson:"comments" json:"comments"`     //📄评论数量
@@ -30,7 +30,7 @@ func (u *Video) New() *Video {
 		UserName:   u.UserName,
 		Desc:       u.Desc,
 		VideoURL:   u.VideoURL,
-		Tag:        u.Tag,
+		Tags:       u.Tags,
 		Praises:    u.Praises,
 		Treads:     u.Treads,
 		Comments:   u.Comments,

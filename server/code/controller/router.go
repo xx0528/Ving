@@ -7,11 +7,11 @@ import (
 	"server/database"
 	// "errors"
 	"html/template"
-	"net/http"
+	// "net/http"
 	// "strconv"
 	"strings"
 
-	"github.com/88250/gulu"
+	// "github.com/88250/gulu"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
@@ -103,17 +103,4 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 	})
 
 	return ret
-}
-
-func getStatusAction(c *gin.Context) {
-	result := gulu.Ret.NewResult()
-	defer c.JSON(http.StatusOK, result)
-
-}
-
-func getIndex(c *gin.Context) {
-	result := gulu.Ret.NewResult()
-	result.Msg = "Hello web server"
-	// c.String(http.StatusOK, result)
-	defer c.JSON(http.StatusOK, result)
 }
