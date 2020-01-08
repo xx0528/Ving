@@ -8,7 +8,7 @@
     "SessionSecret": "",
     "SessionMaxAge": 86400,
     "MongoConnect": "mongodb://root:123456@127.0.0.1:27017/admin",
-    "MongoDBName": "Movie",
+    "MongoDBName": "Server",
     "AxiosBaseURL": "/api",
     "MockServer": "http://localhost:8888"
 }
