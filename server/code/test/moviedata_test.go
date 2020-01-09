@@ -99,17 +99,17 @@ func getFilmsInfoArray() (data []interface{}) {
 	for i = 0; i <= 100; i++ {
 		data = append(data, model.Video{
 			ID:       primitive.NewObjectID(),
-			UserID:     fmt.Sprintf("testName_%d", i+1),
-			UserName:    fmt.Sprintf("1235_%d@gmail.com", i+1),
+			UserID:     primitive.NewObjectID(),
+			UserName:    "Ving精选",
 			Desc:    fmt.Sprintf("18821231%d", i+1),
-			VideoUrl:  fmt.Sprintf("www.baidu.com"),
-			Tags:  time.Now(),
-			Praises:  rand.Intn(100000),
-			Treads:	 rand.Intn(100000),
-			Comments:	 rand.Intn(100000),
-			Transmits:	 rand.Intn(100000),
-			UpdateTime:	 rand.Intn(100000),
-			Duration: rand.Intn(70),
+			VideoURL:  "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=183169&resourceType=video&editionType=default&source=aliyun&playUrlType=url_oss&f=iphone&u=&vc=0",
+			Tags:  "美食|搞笑",
+			Praises:  12335,
+			Treads:	 12335,
+			Comments:	 12335,
+			Transmits:	 12335,
+			UpdateTime:	 time.Now(),
+			Duration: 70,
 		})
 	}
 	return
