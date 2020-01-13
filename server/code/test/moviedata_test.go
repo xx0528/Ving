@@ -77,6 +77,26 @@ func TestInsertMovies(t *testing.T) {
 	fmt.Printf("InsertMany插入的消息ID:%v\n", insertManyRes.InsertedIDs)
 }
 
+type result struct {
+    Args string `json:"args"`
+    Headers map[string]string `json:"headers"`
+    Origin string `json:"origin"`
+    Url string `json:"url"`
+}
+
+func TestGetVideoInfoToDB() {
+	resp, err := http.Get("http://baobab.kaiyanapp.com/api/v2/feed?date=1578531600000&num=1&udid=d2807c895f0348a180148c9dfa6f2feeac0781b5&deviceModel=Android%20SDK%20built%20for%20x86")
+    if err != nil {
+        return
+    }
+    defer resp.Body.Close()
+    body, _ := ioutil.ReadAll(resp.Body)
+    fmt.Println(string(body))
+    var res result
+    _ = json.Unmarshal(body,&res)
+    fmt.Printf("%#v", res)
+}
+
 func checkErr(err error) {
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

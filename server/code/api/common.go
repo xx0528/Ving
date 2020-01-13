@@ -23,6 +23,9 @@ type CommonAPI struct {
 func (a *CommonAPI) GetHome(ctx *gin.Context) {
 	result := gulu.Ret.NewResult()
 	result.Msg = "getHome"
+
+	collection = a.DB.Collection("Films")
+
 	defer ctx.JSON(http.StatusOK, result)
 }
 func (a *CommonAPI) GetVideo(ctx *gin.Context) {
