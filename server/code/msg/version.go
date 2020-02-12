@@ -1,4 +1,4 @@
-package model
+package msg
 
 // VersionInfo Model
 //

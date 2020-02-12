@@ -2,9 +2,12 @@ package api
 
 import (
 	// "errors"
-	"github.com/gin-gonic/gin"
-	// "server/model"
+	"server/msg"
+	"time"
+
 	"github.com/88250/gulu"
+	"github.com/gin-gonic/gin"
+
 	// "go.mongodb.org/mongo-driver/bson/primitive"
 	"net/http"
 	// "strconv"
@@ -12,7 +15,6 @@ import (
 
 // The CommonDatabase interface for encapsulating database access.
 type CommonDatabase interface {
-	
 }
 
 // The CommonAPI provides handlers for managing users.
@@ -24,8 +26,35 @@ func (a *CommonAPI) GetHome(ctx *gin.Context) {
 	result := gulu.Ret.NewResult()
 	result.Msg = "getHome"
 
-	collection = a.DB.Collection("Films")
-
+	// collection = a.DB.Collection("Films")
+	msgHome := &msg.Home{
+		NextPageUrl:     "127.0.0.1:5678/api/home/date=1581296400000&num=1",
+		NextPublishTime: time.Now().Unix(),
+		NewestIssueType: "night",
+	}
+	for i := 0; i < 3; i++ {
+		issue := &msg.Issue{
+			Count:       i,
+			Date:        time.Now().Unix(),
+			PublishTime: time.Now().Unix(),
+		}
+		for i := 0; i < 2; i++ {
+			msgItem := &msg.Item{
+				Itype: "videoCollectionWithBrief",
+				Tag:   "null",
+			}
+			msgItem.IData = msg.IData{
+				ActionUrl:   "",
+				DataType:    "Banner",
+				Description: "",
+				Id:          0,
+				Title:       "",
+			}
+			issue.ItemList = append(issue.ItemList, *msgItem)
+		}
+		msgHome.IssueList = append(msgHome.IssueList, *issue)
+	}
+	result.Data = msgHome
 	defer ctx.JSON(http.StatusOK, result)
 }
 func (a *CommonAPI) GetVideo(ctx *gin.Context) {
