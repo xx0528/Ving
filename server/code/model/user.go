@@ -13,6 +13,7 @@ type User struct {
 	Address  UserAddress `bson:"address" json:"address"`   //地址
 	Phone    string      `bson:"phone" json:"phone"`       //手机号
 	Website  string      `bson:"website" json:"website"`   //主页
+	Desc     string      `bson:"desc" json:"descripthon"`  //简介
 	Created  time.Time   `bson:"created" json:"created"`   //建号时间
 	Updated  time.Time   `bson:"updated" json:"updated"`   //更新时间
 	VideoNum int         `bson:"videoNum" json:"videoNum"` //视频个数

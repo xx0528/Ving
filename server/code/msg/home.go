@@ -1,6 +1,8 @@
 package msg
 
-import "server/model"
+import (
+	"server/model"
+)
 
 type Home struct {
 	IssueList       []Issue `json:"issueList"`
@@ -23,7 +25,7 @@ type Issue struct {
 type Item struct {
 	Itype string `json:"type"`
 	IData IData  `json:"data"`
-	Tag   string `json:"Tag"`
+	Tag   string `json:"tag"`
 }
 
 type IData struct {
@@ -43,7 +45,7 @@ type IData struct {
 	LikeCount         int         `json:"likeCount"`
 	PlayUrl           string      `json:"playUrl"`
 	ThumbPlayUrl      string      `json:"thumbPlayUrl"`
-	Duration          int64       `json:"duration"`
+	Duration          int32       `json:"duration"`
 	Message           string      `json:"message"`
 	CreateTime        int64       `json:"createTime"`
 	IWebUrl           Weburl      `json:"webUrl"`
@@ -78,10 +80,13 @@ type IData struct {
 }
 
 type Tag struct {
-	Id        int         `json:"id"`
-	Name      string      `json:"name"`
-	ActionUrl string      `json:"actionUrl"`
-	AdTrack   interface{} `json:"adTrack"`
+	Id          int         `json:"id"`
+	Name        string      `json:"name"`
+	ActionUrl   string      `json:"actionUrl"`
+	AdTrack     interface{} `json:"adTrack"`
+	BGPicture   string      `json:"bgPicture"`
+	Desc        string      `json:"desc"`
+	HeaderImage string      `json:"headerImage"`
 }
 
 type Provider struct {
@@ -96,6 +101,7 @@ type ParentReply struct {
 }
 
 type Author struct {
+	ID          int64  `json:"id"`
 	Icon        string `json:"icon"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
