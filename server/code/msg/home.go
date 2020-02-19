@@ -115,10 +115,10 @@ type Weburl struct {
 }
 
 type PlayInfo struct {
-	Name    string  `json:"name"`
-	Url     string  `json:"url"`
-	Ptype   string  `json:"ptype"`
-	UrlList []int64 `json:"urlList"`
+	Name    string                   `json:"name"`
+	Url     string                   `json:"url"`
+	Ptype   string                   `json:"ptype"`
+	UrlList []map[string]interface{} `json:"urlList"`
 }
 
 type Consumption struct {

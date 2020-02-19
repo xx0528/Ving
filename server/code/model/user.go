@@ -2,20 +2,20 @@ package model
 
 import (
 	"time"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // The User holds
 type User struct {
-	ID       primitive.ObjectID `bson:"_id" json:"id"`				//用户ID
-	Name     string             `bson:"name" json:"name"`			//用户昵称
-	Email    string             `bson:"email" json:"email"`			//email
-	Address  UserAddress        `bson:"address" json:"address"`		//地址
-	Phone    string             `bson:"phone" json:"phone"`			//手机号
-	Website  string             `bson:"website" json:"website"`		//主页
-	Created  time.Time          `bson:"created" json:"created"`		//建号时间
-	Updated  time.Time          `bson:"updated" json:"updated"`		//更新时间
+	ID       int64       `bson:"_id" json:"id"`            //用户ID
+	Name     string      `bson:"name" json:"name"`         //用户昵称
+	Icon     string      `bson:"icon" json:"icon"`         //头像
+	Email    string      `bson:"email" json:"email"`       //email
+	Address  UserAddress `bson:"address" json:"address"`   //地址
+	Phone    string      `bson:"phone" json:"phone"`       //手机号
+	Website  string      `bson:"website" json:"website"`   //主页
+	Created  time.Time   `bson:"created" json:"created"`   //建号时间
+	Updated  time.Time   `bson:"updated" json:"updated"`   //更新时间
+	VideoNum int         `bson:"videoNum" json:"videoNum"` //视频个数
 }
 
 // The UserAddress holds
@@ -36,13 +36,15 @@ type UserAddressGeo struct {
 // New is
 func (u *User) New() *User {
 	return &User{
-		ID:       primitive.NewObjectID(),
+		ID:       u.ID,
 		Name:     u.Name,
+		Icon:     u.Icon,
 		Email:    u.Email,
 		Address:  u.Address,
 		Phone:    u.Phone,
 		Website:  u.Website,
 		Created:  time.Now(),
 		Updated:  time.Now(),
+		VideoNum: u.VideoNum,
 	}
 }
