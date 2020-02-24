@@ -2,6 +2,7 @@ package api
 
 import (
 	// "errors"
+	"fmt"
 	"server/msg"
 	"time"
 
@@ -103,4 +104,21 @@ func (a *CommonAPI) GetAuthor(ctx *gin.Context) {
 	result := gulu.Ret.NewResult()
 	result.Msg = "getAuthor"
 	defer ctx.JSON(http.StatusOK, result)
+}
+
+func (a *CommonAPI) GetAnimation(ctx *gin.Context) {
+	// result := gulu.Ret.NewResult()
+	// result.Msg = "获取动画片列表"
+	var aniList []interface{}
+	for i := 0; i < 10; i++ {
+		var aniData = make(map[string]interface{})
+		aniData["id"] = i * 5
+		aniData["name"] = fmt.Sprintf("动画名字--%d", i)
+		aniData["description"] = fmt.Sprintf("动画描述2132---%d", i)
+		aniData["bgPicture"] = "http://img.kaiyanapp.com/afa27b9c52d2ed2f5f8b5f8c12992fcf.png?imageMogr2/quality/60/format/jpg"
+		aniData["videoNum"] = i * 2
+		aniList = append(aniList, aniData)
+	}
+
+	defer ctx.JSON(http.StatusOK, aniList)
 }

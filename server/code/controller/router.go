@@ -1,10 +1,11 @@
 package controller
 
 import (
-	"server/model"
-	"server/util"
 	"server/api"
 	"server/database"
+	"server/model"
+	"server/util"
+
 	// "errors"
 	"html/template"
 	// "net/http"
@@ -59,7 +60,7 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 	commonHandler := api.CommonAPI{DB: db}
 	userHandler := api.UserAPI{DB: db}
 	postHandler := api.PostAPI{DB: db}
-	
+
 	postC := ret.Group(util.PathAPI)
 	{
 		//首页精选 /api/v2/home?
@@ -80,8 +81,10 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 		postC.GET("/tabs/follow", commonHandler.GetFollow)
 		//作者信息 api/v4/pgcs/detail/tab?id=571
 		postC.GET("/pgcs/detail", commonHandler.GetAuthor)
+		//动画列表 api/animation
+		postC.GET("/animation", commonHandler.GetAnimation)
 	}
-	
+
 	postU := ret.Group("/users")
 	{
 		postU.GET("", userHandler.GetUsers)
@@ -96,7 +99,6 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 		postG.PUT(":id", postHandler.UpdatePostByID)
 		postG.DELETE(":id", postHandler.DeletePostByID)
 	}
-
 
 	ret.NoRoute(func(c *gin.Context) {
 		notFound(c)
