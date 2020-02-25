@@ -4,6 +4,7 @@ import (
 	// "errors"
 	"fmt"
 	"server/msg"
+	"strconv"
 	"time"
 
 	"github.com/88250/gulu"
@@ -124,12 +125,36 @@ func (a *CommonAPI) GetAnimation(ctx *gin.Context) {
 }
 
 func (a *CommonAPI) GetMoreAnimation(ctx *gin.Context) {
+
+	pageNum := ctx.Query("num")
+	num, _ := strconv.Atoi(pageNum)
+
 	var aniList []interface{}
 	for i := 0; i < 10; i++ {
 		var aniData = make(map[string]interface{})
-		aniData["id"] = i * 5
-		aniData["name"] = fmt.Sprintf("更多动画名字--%d", i)
-		aniData["description"] = fmt.Sprintf("更多动画描述2132---%d", i)
+		aniData["id"] = (i * num) + i
+		aniData["name"] = fmt.Sprintf("更多动画%d名字--%d", num, i)
+		aniData["description"] = fmt.Sprintf("更多动画%d描述2132---%d", num, i)
+		aniData["bgPicture"] = "http://img.kaiyanapp.com/afa27b9c52d2ed2f5f8b5f8c12992fcf.png?imageMogr2/quality/60/format/jpg"
+		aniData["videoNum"] = i * 3
+		aniList = append(aniList, aniData)
+	}
+
+	defer ctx.JSON(http.StatusOK, aniList)
+}
+
+func (a *CommonAPI) GetRelatedAnimation(ctx *gin.Context) {
+	aniId := ctx.Query("id")
+	fmt.Println("aniId -- -", aniId)
+
+	iAniId, _ := strconv.Atoi(aniId)
+
+	var aniList []interface{}
+	for i := 0; i < 10; i++ {
+		var aniData = make(map[string]interface{})
+		aniData["id"] = (i * iAniId) + i
+		aniData["name"] = fmt.Sprintf("相关动画%d名字--%d", iAniId, i)
+		aniData["description"] = fmt.Sprintf("相关动画%d描述---%d", iAniId, i)
 		aniData["bgPicture"] = "http://img.kaiyanapp.com/afa27b9c52d2ed2f5f8b5f8c12992fcf.png?imageMogr2/quality/60/format/jpg"
 		aniData["videoNum"] = i * 3
 		aniList = append(aniList, aniData)
