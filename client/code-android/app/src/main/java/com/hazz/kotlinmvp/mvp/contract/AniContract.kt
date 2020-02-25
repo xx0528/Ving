@@ -13,7 +13,12 @@ interface AniContract {
         /**
          * 显示动画信息
          */
-        fun showAnimation(aniList: ArrayList<AniBean>)
+        fun setAniData(aniList: ArrayList<AniBean>)
+
+        /**
+         * 设置更多动画
+         */
+        fun setMoreData(aniList: ArrayList<AniBean>)
 
         /**
          * 显示错误信息
@@ -26,5 +31,10 @@ interface AniContract {
          * 获取动画信息
          */
         fun getAnimationData()
+
+        /**
+         * 加载更多数据
+         */
+        fun loadMoreData()
     }
 }

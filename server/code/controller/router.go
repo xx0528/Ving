@@ -83,6 +83,8 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 		postC.GET("/pgcs/detail", commonHandler.GetAuthor)
 		//动画列表 api/animation
 		postC.GET("/animation", commonHandler.GetAnimation)
+		//更多动画列表 api/animationmore
+		postC.GET("/animationmore", commonHandler.GetMoreAnimation)
 	}
 
 	postU := ret.Group("/users")

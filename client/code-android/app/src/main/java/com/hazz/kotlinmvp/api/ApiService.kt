@@ -85,4 +85,10 @@ interface ApiService{
     @GET("http://192.168.0.112:5678/api/animation")
     fun getAnimationData(): Observable<ArrayList<AniBean>>
 
+    /**
+     * 获取更多动画
+     */
+    @GET("http://192.168.0.112:5678/api/animationmore")
+    fun getMoreAnimationData(@Query("num") num:Int): Observable<ArrayList<AniBean>>
+
 }

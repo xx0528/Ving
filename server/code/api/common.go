@@ -122,3 +122,18 @@ func (a *CommonAPI) GetAnimation(ctx *gin.Context) {
 
 	defer ctx.JSON(http.StatusOK, aniList)
 }
+
+func (a *CommonAPI) GetMoreAnimation(ctx *gin.Context) {
+	var aniList []interface{}
+	for i := 0; i < 10; i++ {
+		var aniData = make(map[string]interface{})
+		aniData["id"] = i * 5
+		aniData["name"] = fmt.Sprintf("更多动画名字--%d", i)
+		aniData["description"] = fmt.Sprintf("更多动画描述2132---%d", i)
+		aniData["bgPicture"] = "http://img.kaiyanapp.com/afa27b9c52d2ed2f5f8b5f8c12992fcf.png?imageMogr2/quality/60/format/jpg"
+		aniData["videoNum"] = i * 3
+		aniList = append(aniList, aniData)
+	}
+
+	defer ctx.JSON(http.StatusOK, aniList)
+}

@@ -15,6 +15,7 @@ import com.hazz.kotlinmvp.showToast
 import com.hazz.kotlinmvp.ui.adapter.AniAdapter
 import com.hazz.kotlinmvp.utils.DisplayManager
 import kotlinx.android.synthetic.main.fragment_ani.*
+import com.orhanobut.logger.Logger
 
 /**
  * Created by xx on 2020/02/21.
@@ -28,6 +29,8 @@ class AniFragment: BaseFragment(), AniContract.View{
     private val mAdapter by lazy {activity?.let{ AniAdapter(it, mAniList, R.layout.item_ani) }}
 
     private var mTitle:String? =null
+
+    private var loadingMore = false
 
     private var mAniList = ArrayList<AniBean>()
 
@@ -61,17 +64,36 @@ class AniFragment: BaseFragment(), AniContract.View{
                         if (position % 2 == 0) offset else 0, offset)
             }
         })
+
+        //实现自动加载
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val itemCount = mRecyclerView.layoutManager.itemCount
+                val lastVisibleItem = (mRecyclerView.layoutManager as GridLayoutManager).findLastVisibleItemPosition()
+                if (!loadingMore && lastVisibleItem == (itemCount - 1)) {
+                    loadingMore = true
+                    mPresenter.loadMoreData()
+                }
+            }
+        })
     }
 
     override fun lazyLoad() {
         mPresenter.getAnimationData()
     }
 
-    override fun showAnimation(aniList: ArrayList<AniBean>) {
+    override fun setAniData(aniList: ArrayList<AniBean>) {
+//        Logger.d("setAniData    ----- ")
         mAniList = aniList
         mAdapter?.setData(mAniList)
     }
 
+    override fun setMoreData(aniList: ArrayList<AniBean>) {
+//        Logger.d("setMoreData ----- ")
+        loadingMore = false
+        mAdapter?.addItemData(aniList)
+    }
     override fun showError(errorMsg: String, errorCode: Int) {
         showToast(errorMsg)
         if (errorCode == ErrorStatus.NETWORK_ERROR) {

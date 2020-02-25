@@ -11,6 +11,8 @@ import com.hazz.kotlinmvp.net.exception.ExceptionHandle
  */
 class AniPresenter : BasePresenter<AniContract.View>(), AniContract.Presenter {
 
+    var pageIdx = 0
+
     private val aniModel: AniModel by lazy {
         AniModel()
     }
@@ -22,7 +24,8 @@ class AniPresenter : BasePresenter<AniContract.View>(), AniContract.Presenter {
                 .subscribe({aniList ->
                     mRootView?.apply {
                         dismissLoading()
-                        showAnimation(aniList)
+                        pageIdx += 1
+                        setAniData(aniList)
                     }
                 }, {t ->
                     mRootView?.apply {
@@ -31,6 +34,28 @@ class AniPresenter : BasePresenter<AniContract.View>(), AniContract.Presenter {
                 })
 
         addSubscription(disposable)
+    }
+
+    /**
+     * 加载更多
+     */
+
+    override fun loadMoreData() {
+        val disposable = aniModel.loadMoreAniData(pageIdx)
+                .subscribe({aniList ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        pageIdx += 1
+                        setMoreData(aniList)
+                    }
+                }, {t ->
+                    mRootView?.apply {
+                        showError(ExceptionHandle.handleException(t), ExceptionHandle.errorCode)
+                    }
+                })
+
+        if (disposable != null)
+            addSubscription(disposable)
     }
 
 }

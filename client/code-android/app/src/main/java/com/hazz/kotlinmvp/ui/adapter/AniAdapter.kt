@@ -9,6 +9,8 @@ import com.hazz.kotlinmvp.glide.GlideApp
 import com.hazz.kotlinmvp.mvp.model.bean.AniBean
 import com.hazz.kotlinmvp.view.recyclerview.ViewHolder
 import com.hazz.kotlinmvp.view.recyclerview.adapter.CommonAdapter
+import com.orhanobut.logger.Logger
+import kotlin.math.log
 
 /**
  * Created by xx on 2020/2/24 0:31.
@@ -21,6 +23,16 @@ class AniAdapter(mContext: Context, aniList: ArrayList<AniBean>, layoutId: Int) 
         mData.clear()
         mData = aniList
         notifyDataSetChanged()
+    }
+
+    fun addItemData(aniList: ArrayList<AniBean>) {
+        this.mData.addAll(aniList)
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int {
+//        Logger.d("size --- %d", this.mData.size)
+        return this.mData.size
     }
 
     override fun bindData(holder: ViewHolder, data: AniBean, position: Int) {

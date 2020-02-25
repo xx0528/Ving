@@ -6,11 +6,13 @@ require (
 	github.com/88250/gulu v0.0.0-20191221090949-7ec528e17061
 	github.com/DataDog/zstd v1.4.4 // indirect
 	github.com/bluele/gcache v0.0.0-20190518031135-bc40bd653833
+	github.com/fatih/structs v1.1.0 // indirect
 	github.com/gin-contrib/sessions v0.0.3
 	github.com/gin-gonic/gin v1.5.0
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/go-cmp v0.3.1 // indirect
+	github.com/jackdanger/collectlinks v0.0.0-20160421202702-24c4ee2870ba
 	github.com/mssola/user_agent v0.5.0
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/stretchr/testify v1.4.0
