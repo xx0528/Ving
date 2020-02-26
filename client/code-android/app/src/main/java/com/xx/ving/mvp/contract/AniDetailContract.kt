@@ -18,7 +18,7 @@ interface AniDetailContract {
         /**
          * 设置动画信息
          */
-        fun setAniInfo(itemInfo: AniBean)
+        fun setAniInfo(itemInfo: AniBean.AItem)
 
         /**
          * 设置背景
@@ -28,7 +28,7 @@ interface AniDetailContract {
         /**
          * 设置最新相关视频
          */
-        fun setRecentRelatedAni(itemList: ArrayList<AniBean>)
+        fun setRecentRelatedAni(itemList: ArrayList<AniBean.AItem>)
 
         /**
          * 设置错误信息
@@ -40,7 +40,7 @@ interface AniDetailContract {
         /**
          * 加载动画信息
          */
-        fun loadAniInfo(itemInfo: AniBean)
+        fun loadAniInfo(itemInfo: AniBean.AItem)
 
         /**
          * 请求相关的动画数据

@@ -21,11 +21,11 @@ class AniPresenter : BasePresenter<AniContract.View>(), AniContract.Presenter {
         checkViewAttached()
         mRootView?.showLoading()
         val disposable = aniModel.getAniData()
-                .subscribe({aniList ->
+                .subscribe({aniData ->
                     mRootView?.apply {
                         dismissLoading()
                         pageIdx += 1
-                        setAniData(aniList)
+                        setAniData(aniData.itemList)
                     }
                 }, {t ->
                     mRootView?.apply {
@@ -42,11 +42,11 @@ class AniPresenter : BasePresenter<AniContract.View>(), AniContract.Presenter {
 
     override fun loadMoreData() {
         val disposable = aniModel.loadMoreAniData(pageIdx)
-                .subscribe({aniList ->
+                .subscribe({aniData ->
                     mRootView?.apply {
                         dismissLoading()
                         pageIdx += 1
-                        setMoreData(aniList)
+                        setMoreData(aniData.itemList)
                     }
                 }, {t ->
                     mRootView?.apply {

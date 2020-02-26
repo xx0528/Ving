@@ -31,7 +31,7 @@ class AniFragment: BaseFragment(), AniContract.View{
 
     private var loadingMore = false
 
-    private var mAniList = ArrayList<AniBean>()
+    private var mAniList = ArrayList<AniBean.AItem>()
 
     companion object {
         fun getInstance(title:String): AniFragment {
@@ -82,13 +82,13 @@ class AniFragment: BaseFragment(), AniContract.View{
         mPresenter.getAnimationData()
     }
 
-    override fun setAniData(aniList: ArrayList<AniBean>) {
+    override fun setAniData(aniList: ArrayList<AniBean.AItem>) {
 //        Logger.d("setAniData    ----- ")
         mAniList = aniList
         mAdapter?.setData(mAniList)
     }
 
-    override fun setMoreData(aniList: ArrayList<AniBean>) {
+    override fun setMoreData(aniList: ArrayList<AniBean.AItem>) {
 //        Logger.d("setMoreData ----- ")
         loadingMore = false
         mAdapter?.addItemData(aniList)

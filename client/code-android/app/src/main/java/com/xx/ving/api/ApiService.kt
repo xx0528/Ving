@@ -83,18 +83,18 @@ interface ApiService{
      * 获取动画
      */
     @GET("http://192.168.0.112:5678/api/animation")
-    fun getAnimationData(): Observable<ArrayList<AniBean>>
+    fun getAnimationData(): Observable<AniBean>
 
     /**
      * 获取更多动画
      */
     @GET("http://192.168.0.112:5678/api/animation/more")
-    fun getMoreAnimationData(@Query("num") num:Int): Observable<ArrayList<AniBean>>
+    fun getMoreAnimationData(@Query("num") num:Int): Observable<AniBean>
 
     /**
      * 根据item id获取相关动画
      */
     @GET("http://192.168.0.112:5678/api/animation/related")
-    fun getRelatedAni(@Query("id") id: Long): Observable<ArrayList<AniBean>>
+    fun getRelatedAni(@Query("id") id: Long): Observable<AniBean>
 
 }

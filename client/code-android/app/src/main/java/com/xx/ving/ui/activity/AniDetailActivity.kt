@@ -1,6 +1,7 @@
 package com.hazz.ving.ui.activity
 
 import android.annotation.TargetApi
+import android.content.res.Configuration
 import android.os.Build
 import android.support.v4.view.ViewCompat
 import android.transition.Transition
@@ -17,6 +18,7 @@ import com.hazz.ving.mvp.model.bean.AniBean
 import com.hazz.ving.mvp.presenter.AniDetailPresenter
 import com.hazz.ving.showToast
 import com.hazz.ving.ui.adapter.AniDetailAdapter
+import com.hazz.ving.utils.CleanLeakUtils
 import com.hazz.ving.utils.WatchHistoryUtils
 import com.hazz.ving.view.VideoListener
 import com.scwang.smartrefresh.header.MaterialHeader
@@ -24,6 +26,8 @@ import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import java.text.SimpleDateFormat
 import java.util.*
 import com.orhanobut.logger.Logger
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 import kotlinx.android.synthetic.main.activity_ani_detail.*
 import kotlin.collections.ArrayList
 
@@ -50,10 +54,10 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
     /**
      * Item 详细数据
      */
-    private lateinit var itemData: AniBean
+    private lateinit var itemData: AniBean.AItem
     private var orientationUtils: OrientationUtils? = null
 
-    private var itemList = ArrayList<AniBean>()
+    private var itemList = ArrayList<AniBean.AItem>()
 
     private var isPlay: Boolean = false
     private var isPause: Boolean =false
@@ -66,7 +70,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
     override fun layoutId(): Int = R.layout.activity_ani_detail
 
     override fun initData() {
-        itemData = intent.getSerializableExtra(Constants.BUNDLE_VIDEO_DATA) as AniBean
+        itemData = intent.getSerializableExtra(Constants.BUNDLE_VIDEO_DATA) as AniBean.AItem
         isTransition = intent.getBooleanExtra(TRANSITION, false)
 
         saveWatchAniHistoryInfo(itemData)
@@ -75,7 +79,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
     /**
      * 保存观看记录
      */
-    private fun saveWatchAniHistoryInfo(watchItem: AniBean) {
+    private fun saveWatchAniHistoryInfo(watchItem: AniBean.AItem) {
         //保存之前要先查询sp中是否有该value的记录，有则删除。这样保证搜索历史记录不会有重复的条目
         var historyMap = WatchHistoryUtils.getAll(Constants.FILE_WATCH_HISTORY_NAME, MyApplication.context) as Map<*, *>
         for ((key, _) in historyMap) {
@@ -118,6 +122,13 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         })
     }
 
+
+    private fun getCurPlay(): GSYVideoPlayer {
+        return if (mAniVideoView.fullWindowPlayer != null) {
+            mAniVideoView.fullWindowPlayer
+        } else mAniVideoView
+    }
+
     private fun initTransition() {
         if (isTransition && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             postponeEnterTransition()
@@ -144,7 +155,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         val imageView = ImageView(this)
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         GlideApp.with(this)
-                .load(itemData.bgPicture)
+                .load(itemData.data?.cover?.homepage)
                 .centerCrop()
                 .into(imageView)
         mAniVideoView.thumbImageView = imageView
@@ -196,6 +207,13 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         }
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        if (isPlay && !isPause) {
+            mAniVideoView.onConfigurationChanged(this, newConfig, orientationUtils)
+        }
+    }
+
     override fun initView() {
 
         mPresenter.attachView(this)
@@ -216,11 +234,11 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         mAniVideoView.startPlayLogic()
     }
 
-    override fun setAniInfo(itemInfo: AniBean) {
+    override fun setAniInfo(itemInfo: AniBean.AItem) {
         itemData = itemInfo
         mAdapter.addData(itemInfo)
         // 请求相关最新视频
-        mPresenter.requestRelatedAni(itemInfo?.id)
+        itemInfo.data?.id?.let { mPresenter.requestRelatedAni(it) }
     }
 
     override fun setBackground(url: String) {
@@ -232,7 +250,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
                 .into(mAniBackground)
     }
 
-    override fun setRecentRelatedAni(itemList: ArrayList<AniBean>) {
+    override fun setRecentRelatedAni(itemList: ArrayList<AniBean.AItem>) {
         mAdapter.addData(itemList)
         this.itemList = itemList
     }
@@ -245,5 +263,44 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
 
     override fun dismissLoading() {
         mRefreshLayout.finishRefresh()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCurPlay().onVideoResume()
+        isPause = false
+    }
+
+    override fun onPause() {
+        super.onPause()
+        getCurPlay().onVideoPause()
+        isPause = true
+    }
+
+    override fun onDestroy() {
+        CleanLeakUtils.fixInputMethodManagerLeak(this)
+        super.onDestroy()
+        GSYVideoPlayer.releaseAllVideos()
+        orientationUtils?.releaseListener()
+        mPresenter.detachView()
+    }
+
+
+    /**
+     * 监听返回键
+     */
+    override fun onBackPressed() {
+        orientationUtils?.backToProtVideo()
+        if (StandardGSYVideoPlayer.backFromWindowFull(this))
+            return
+        //释放所有
+        mAniVideoView.setStandardVideoAllCallBack(null)
+        GSYVideoPlayer.releaseAllVideos()
+        if (isTransition && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) run {
+            super.onBackPressed()
+        } else {
+            finish()
+            overridePendingTransition(R.anim.anim_out, R.anim.anim_in)
+        }
     }
 }

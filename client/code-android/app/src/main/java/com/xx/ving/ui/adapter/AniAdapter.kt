@@ -1,5 +1,6 @@
 package com.hazz.ving.ui.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -17,21 +18,22 @@ import com.hazz.ving.mvp.model.bean.AniBean
 import com.hazz.ving.ui.activity.AniDetailActivity
 import com.hazz.ving.view.recyclerview.ViewHolder
 import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
+import com.orhanobut.logger.Logger
 
 /**
  * Created by xx on 2020/2/24 0:31.
  * desc: AniAdapter
  */
-class AniAdapter(mContext: Context, aniList: ArrayList<AniBean>, layoutId: Int) :
-        CommonAdapter<AniBean>(mContext, aniList, layoutId){
+class AniAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>, layoutId: Int) :
+        CommonAdapter<AniBean.AItem>(mContext, aniList, layoutId){
 
-    fun setData(aniList: ArrayList<AniBean>){
+    fun setData(aniList: ArrayList<AniBean.AItem>){
         mData.clear()
         mData = aniList
         notifyDataSetChanged()
     }
 
-    fun addItemData(aniList: ArrayList<AniBean>) {
+    fun addItemData(aniList: ArrayList<AniBean.AItem>) {
         this.mData.addAll(aniList)
         notifyDataSetChanged()
     }
@@ -41,8 +43,10 @@ class AniAdapter(mContext: Context, aniList: ArrayList<AniBean>, layoutId: Int) 
         return this.mData.size
     }
 
-    override fun bindData(holder: ViewHolder, data: AniBean, position: Int) {
-        holder.setImagePath(R.id.iv_ani_img, object : ViewHolder.HolderImageLoader(data.bgPicture) {
+    @SuppressLint("SetTextI18n")
+    override fun bindData(holder: ViewHolder, data: AniBean.AItem, position: Int) {
+        data.data?.cover?.homepage?.let {
+            holder.setImagePath(R.id.iv_ani_img, object : ViewHolder.HolderImageLoader(it) {
             override fun loadImage(iv: ImageView, path: String) {
                 GlideApp.with(mContext)
                         .load(path)
@@ -52,17 +56,18 @@ class AniAdapter(mContext: Context, aniList: ArrayList<AniBean>, layoutId: Int) 
                         .into(iv)
             }
         })
+        }
 
-        holder.getView<TextView>(R.id.tv_ani_name).text = data.name
-        holder.getView<TextView>(R.id.tv_ani_desc).text = data.description
-        holder.getView<TextView>(R.id.tv_ani_num).text = data.videoNum.toString() + "集全"
+        holder.getView<TextView>(R.id.tv_ani_name).text = data.data?.name ?: "默认名字"
+        holder.getView<TextView>(R.id.tv_ani_desc).text = data.data?.desc ?: "默认描述"
+        holder.getView<TextView>(R.id.tv_ani_num).text = data.data?.aniNum.toString() + "集全"
 
         holder.setOnItemClickListener(listener = View.OnClickListener {
             goToAnimationPlayer(mContext as Activity, holder.getView(R.id.iv_ani_img), data)
         })
     }
 
-    private fun goToAnimationPlayer(activity: Activity, view: View, itemData: AniBean) {
+    private fun goToAnimationPlayer(activity: Activity, view: View, itemData: AniBean.AItem) {
         val intent = Intent(activity, AniDetailActivity::class.java)
         intent.putExtra(Constants.BUNDLE_VIDEO_DATA, itemData)
         intent.putExtra(AniDetailActivity.TRANSITION, true)

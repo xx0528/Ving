@@ -17,13 +17,13 @@ class AniDetailPresenter : BasePresenter<AniDetailContract.View>(), AniDetailCon
         AniDetailModel()
     }
 
-    override fun loadAniInfo(itemInfo: AniBean) {
+    override fun loadAniInfo(itemInfo: AniBean.AItem) {
 
         val netType = NetworkUtil.isWifi(MyApplication.context)
         // 检测是否绑定 View
         checkViewAttached()
 
-        mRootView?.setAni(itemInfo.bgPicture)
+        itemInfo.data?.playUrl?.let { mRootView?.setAni(it) }
 
         //设置背景
 //        val backgroundUrl = itemInfo.data.cover.blurred + "/thumbnail/${DisplayManager.getScreenHeight()!! - DisplayManager.dip2px(250f)!!}x${DisplayManager.getScreenWidth()}"
@@ -33,6 +33,6 @@ class AniDetailPresenter : BasePresenter<AniDetailContract.View>(), AniDetailCon
     }
 
     override fun requestRelatedAni(id: Long) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

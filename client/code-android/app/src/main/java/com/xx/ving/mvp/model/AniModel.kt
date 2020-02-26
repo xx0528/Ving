@@ -13,12 +13,12 @@ class AniModel {
     /**
      * 获取动画信息
      */
-    fun getAniData(): Observable<ArrayList<AniBean>> {
+    fun getAniData(): Observable<AniBean> {
         return RetrofitManager.service.getAnimationData()
                 .compose(SchedulerUtils.ioToMain())
     }
 
-    fun loadMoreAniData(num:Int):Observable<ArrayList<AniBean>> {
+    fun loadMoreAniData(num:Int):Observable<AniBean> {
         return RetrofitManager.service.getMoreAnimationData(num)
                 .compose(SchedulerUtils.ioToMain())
     }

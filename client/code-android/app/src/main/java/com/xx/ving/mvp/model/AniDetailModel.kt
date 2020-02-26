@@ -10,7 +10,7 @@ import io.reactivex.Observable
  * desc: AniDetailModel
  */
 class AniDetailModel {
-    fun requestRelatedData(id:Long): Observable<ArrayList<AniBean>> {
+    fun requestRelatedAniData(id:Long): Observable<AniBean> {
         return RetrofitManager.service.getRelatedAni(id)
                 .compose(SchedulerUtils.ioToMain())
     }

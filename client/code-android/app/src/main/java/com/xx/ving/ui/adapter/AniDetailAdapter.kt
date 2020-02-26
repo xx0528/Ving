@@ -11,17 +11,17 @@ import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
  * Created by xx on 2020/2/25 21:46.
  * desc: AniDetailAdapter 动画详情
  */
-class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean>) :
-        CommonAdapter<AniBean>(mContext, aniList, object : MultipleType<AniBean>{
-            override fun getLayoutId(item: AniBean, position: Int): Int {
+class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
+        CommonAdapter<AniBean.AItem>(mContext, aniList, object : MultipleType<AniBean.AItem>{
+            override fun getLayoutId(item: AniBean.AItem, position: Int): Int {
                 return when {
                     position == 0 ->
                         R.layout.item_video_detail_info
 
-                    aniList[position].name == "textCard" ->
+                    aniList[position].aType == "textCard" ->
                         R.layout.item_video_text_card
 
-                    aniList[position].name == "videoSmallCard" ->
+                    aniList[position].aType == "videoSmallCard" ->
                         R.layout.item_video_small_card
                     else ->
                         throw IllegalAccessException("Api 解析出错了，出现其他类型")
@@ -32,7 +32,7 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean>) :
     /**
      * 添加动画的详细信息
      */
-    fun addData(item: AniBean) {
+    fun addData(item: AniBean.AItem) {
         mData.clear()
         notifyDataSetChanged()
         mData.add(item)
@@ -42,21 +42,21 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean>) :
     /**
      * 添加相关推荐等数据
      */
-    fun addData(item: ArrayList<AniBean>) {
+    fun addData(item: ArrayList<AniBean.AItem>) {
         mData.addAll(item)
         notifyItemRangeInserted(1, item.size)
     }
 
-    private var mOnItemClickRelatedAni: ((item: AniBean) -> Unit)? = null
+    private var mOnItemClickRelatedAni: ((item: AniBean.AItem) -> Unit)? = null
 
-    fun setOnItemDetailClick(mItemRelatedAni: (item: AniBean) -> Unit) {
+    fun setOnItemDetailClick(mItemRelatedAni: (item: AniBean.AItem) -> Unit) {
         this.mOnItemClickRelatedAni = mItemRelatedAni
     }
 
     /**
      * 绑定数据
      */
-    override fun bindData(holder: ViewHolder, data: AniBean, position: Int) {
+    override fun bindData(holder: ViewHolder, data: AniBean.AItem, position: Int) {
 
     }
 

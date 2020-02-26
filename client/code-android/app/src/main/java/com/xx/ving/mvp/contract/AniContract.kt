@@ -13,12 +13,12 @@ interface AniContract {
         /**
          * 显示动画信息
          */
-        fun setAniData(aniList: ArrayList<AniBean>)
+        fun setAniData(aniList: ArrayList<AniBean.AItem>)
 
         /**
          * 设置更多动画
          */
-        fun setMoreData(aniList: ArrayList<AniBean>)
+        fun setMoreData(aniList: ArrayList<AniBean.AItem>)
 
         /**
          * 显示错误信息

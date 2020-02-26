@@ -3,6 +3,7 @@ package api
 import (
 	// "errors"
 	"fmt"
+	"math/rand"
 	"server/msg"
 	"strconv"
 	"time"
@@ -110,37 +111,38 @@ func (a *CommonAPI) GetAuthor(ctx *gin.Context) {
 func (a *CommonAPI) GetAnimation(ctx *gin.Context) {
 	// result := gulu.Ret.NewResult()
 	// result.Msg = "获取动画片列表"
-	var aniList []interface{}
-	for i := 0; i < 10; i++ {
-		var aniData = make(map[string]interface{})
-		aniData["id"] = i * 5
-		aniData["name"] = fmt.Sprintf("动画名字--%d", i)
-		aniData["description"] = fmt.Sprintf("动画描述2132---%d", i)
-		aniData["bgPicture"] = "http://img.kaiyanapp.com/afa27b9c52d2ed2f5f8b5f8c12992fcf.png?imageMogr2/quality/60/format/jpg"
-		aniData["videoNum"] = i * 2
-		aniList = append(aniList, aniData)
-	}
 
-	defer ctx.JSON(http.StatusOK, aniList)
+	var aniData = make(map[string]interface{})
+	rand.Seed(time.Now().UnixNano())
+	num := 3 + rand.Intn(6)
+	aniData["itemList"] = a.GetAniList("common", num, "", 0, 0)
+
+	aniData["aType"] = "TypeAnimation"
+	aniData["releaseTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["date"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["total"] = rand.Intn(5)
+	aniData["publishTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["count"] = rand.Intn(5)
+	aniData["nextPage"] = "http://baobab.kaiyanapp.com/api/v2/feed?date=1582506000000&num=1"
+	defer ctx.JSON(http.StatusOK, aniData)
 }
 
 func (a *CommonAPI) GetMoreAnimation(ctx *gin.Context) {
 
 	pageNum := ctx.Query("num")
-	num, _ := strconv.Atoi(pageNum)
-
-	var aniList []interface{}
-	for i := 0; i < 10; i++ {
-		var aniData = make(map[string]interface{})
-		aniData["id"] = (i * num) + i
-		aniData["name"] = fmt.Sprintf("更多动画%d名字--%d", num, i)
-		aniData["description"] = fmt.Sprintf("更多动画%d描述2132---%d", num, i)
-		aniData["bgPicture"] = "http://img.kaiyanapp.com/afa27b9c52d2ed2f5f8b5f8c12992fcf.png?imageMogr2/quality/60/format/jpg"
-		aniData["videoNum"] = i * 3
-		aniList = append(aniList, aniData)
-	}
-
-	defer ctx.JSON(http.StatusOK, aniList)
+	pageIdx, _ := strconv.Atoi(pageNum)
+	var aniData = make(map[string]interface{})
+	rand.Seed(time.Now().UnixNano())
+	num := 3 + rand.Intn(6)
+	aniData["itemList"] = a.GetAniList("common", num, "", 0, pageIdx)
+	aniData["aType"] = "TypeAnimation"
+	aniData["releaseTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["date"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["total"] = rand.Intn(5)
+	aniData["publishTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["count"] = rand.Intn(5)
+	aniData["nextPage"] = "http://baobab.kaiyanapp.com/api/v2/feed?date=1582506000000&num=1"
+	defer ctx.JSON(http.StatusOK, aniData)
 }
 
 func (a *CommonAPI) GetRelatedAnimation(ctx *gin.Context) {
@@ -149,16 +151,81 @@ func (a *CommonAPI) GetRelatedAnimation(ctx *gin.Context) {
 
 	iAniId, _ := strconv.Atoi(aniId)
 
-	var aniList []interface{}
-	for i := 0; i < 10; i++ {
+	var aniData = make(map[string]interface{})
+	rand.Seed(time.Now().UnixNano())
+	num := 3 + rand.Intn(6)
+	aniData["itemList"] = a.GetAniList("common", num, "", 0, iAniId)
+
+	aniData["aType"] = "TypeAnimation"
+	aniData["releaseTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["date"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["total"] = rand.Intn(5)
+	aniData["publishTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["count"] = rand.Intn(5)
+	aniData["nextPage"] = "http://baobab.kaiyanapp.com/api/v2/feed?date=1582506000000&num=1"
+	defer ctx.JSON(http.StatusOK, aniData)
+}
+
+func (a *CommonAPI) GetAniList(aType string, num int, category string, aniID int64, pageIdx int) (aniList []interface{}) {
+	for i := 0; i < num; i++ {
+		var authorData = make(map[string]interface{})
+		authorData["id"] = 50000 + rand.Intn(10000)
+		authorData["videoNum"] = rand.Intn(100)
+		authorData["icon"] = "http://img.kaiyanapp.com/98beab66d3885a139b54f21e91817c4f.jpeg"
+		authorData["name"] = "VING广告精选"
+		authorData["description"] = "为广告人的精彩创意点赞"
+
+		var tagList []interface{}
+		tagNum := rand.Intn(5)
+		for i := 0; i < tagNum; i++ {
+			var tagData = make(map[string]interface{})
+			tagData["id"] = 50000 + rand.Intn(10000)
+			tagData["name"] = fmt.Sprintf("脑洞广告%d", i)
+			tagData["actionUrl"] = "eyepetizer://tag/766/?title=%E8%84%91%E6%B4%9E%E5%B9%BF%E5%91%8A"
+			tagData["bgPicture"] = "http://img.kaiyanapp.com/7c46ad04ff913b87915615c78d226a40.jpeg?imageMogr2/quality/60/format/jpg"
+			tagData["headerImage"] = "http://img.kaiyanapp.com/0d6ab7ed49de67eab89ada4f65353e8c.jpeg?imageMogr2/quality/60/format/jpg"
+			tagList = append(tagList, tagData)
+		}
+
+		var coverData = make(map[string]interface{})
+		coverData["feed"] = "http://img.kaiyanapp.com/543451a3991b08eabb1a5f8a2f9f5d39.jpeg?imageMogr2/quality/60/format/jpg"
+		coverData["blurred"] = "http://img.kaiyanapp.com/0379d60d05c7abdd12112bcda784d5cd.jpeg?imageMogr2/quality/60/format/jpg"
+		coverData["detail"] = "http://img.kaiyanapp.com/543451a3991b08eabb1a5f8a2f9f5d39.jpeg?imageMogr2/quality/60/format/jpg"
+		coverData["homepage"] = "http://img.kaiyanapp.com/543451a3991b08eabb1a5f8a2f9f5d39.jpeg?imageView2/1/w/720/h/560/format/jpg/q/75|watermark/1/image/aHR0cDovL2ltZy5rYWl5YW5hcHAuY29tL2JsYWNrXzMwLnBuZw==/dissolve/100/gravity/Center/dx/0/dy/0|imageslim"
+
+		var data = make(map[string]interface{})
+		data["id"] = 50000 + rand.Intn(10000)
+		data["name"] = fmt.Sprintf("动画名字--%d", i)
+		data["title"] = fmt.Sprintf("动画标题--%d", i)
+		data["aniNum"] = 10 + rand.Intn(80)
+		data["curPlayNum"] = rand.Intn(10)
+		data["aniTitle"] = fmt.Sprintf("动画标题标题--%d", i)
+		data["dataType"] = "Animation"
+		data["desc"] = fmt.Sprintf("动画描述-000%d", i)
+		data["author"] = authorData
+		data["cover"] = coverData
+		data["category"] = "动画分类"
+		data["likeCount"] = rand.Intn(100000)
+		data["score"] = float32(3+rand.Intn(7)) + (float32(rand.Intn(10)) / 10)
+		data["playUrl"] = "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=187478&resourceType=video&editionType=default&source=aliyun&playUrlType=url_oss"
+		data["duration"] = 50 + rand.Intn(200)
+		data["createTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+		data["tags"] = tagList
+		data["aType"] = "动画类型"
+		data["date"] = time.Now().Unix() - int64(rand.Intn(1000))
+		data["idx"] = rand.Intn(100)
+		data["label"] = "动画标签"
+		data["promotion"] = "推广"
+		data["played"] = false
+		data["subtitles"] = "动画子标题"
+		data["lastViewTime"] = "最后观看时间"
+
 		var aniData = make(map[string]interface{})
-		aniData["id"] = (i * iAniId) + i
-		aniData["name"] = fmt.Sprintf("相关动画%d名字--%d", iAniId, i)
-		aniData["description"] = fmt.Sprintf("相关动画%d描述---%d", iAniId, i)
-		aniData["bgPicture"] = "http://img.kaiyanapp.com/afa27b9c52d2ed2f5f8b5f8c12992fcf.png?imageMogr2/quality/60/format/jpg"
-		aniData["videoNum"] = i * 3
+		aniData["aType"] = "AnimationType"
+		aniData["tag"] = "动画片"
+		aniData["data"] = data
 		aniList = append(aniList, aniData)
 	}
 
-	defer ctx.JSON(http.StatusOK, aniList)
+	return
 }

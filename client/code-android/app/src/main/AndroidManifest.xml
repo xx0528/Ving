@@ -49,6 +49,11 @@
             android:name=".ui.activity.VideoDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
+        <!-- 动画播放详情页面 -->
+        <activity
+            android:name=".ui.activity.AniDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
         <!-- 分类详情 -->
         <activity
             android:name=".ui.activity.CategoryDetailActivity"
