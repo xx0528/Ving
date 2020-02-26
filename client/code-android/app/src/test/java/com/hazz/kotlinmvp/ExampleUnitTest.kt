@@ -1,4 +1,4 @@
-package com.hazz.kotlinmvp
+package com.hazz.ving
 
 import org.junit.Test
 
