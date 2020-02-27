@@ -1,4 +1,4 @@
-package com.hazz.ving.view.recyclerview.adapter
+package com.xx.ving.view.recyclerview.adapter
 
 /**
  *

@@ -1,14 +1,14 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.annotation.SuppressLint
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.utils.CleanLeakUtils
-import com.hazz.ving.utils.StatusBarUtil
+import com.xx.ving.R
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.utils.CleanLeakUtils
+import com.xx.ving.utils.StatusBarUtil
 import com.scwang.smartrefresh.layout.api.RefreshHeader
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener
 import com.scwang.smartrefresh.layout.util.DensityUtil

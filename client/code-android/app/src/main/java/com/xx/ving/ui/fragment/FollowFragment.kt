@@ -1,16 +1,16 @@
-package com.hazz.ving.ui.fragment
+package com.xx.ving.ui.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseFragment
-import com.hazz.ving.mvp.contract.FollowContract
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.mvp.presenter.FollowPresenter
-import com.hazz.ving.net.exception.ErrorStatus
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.adapter.FollowAdapter
+import com.xx.ving.R
+import com.xx.ving.base.BaseFragment
+import com.xx.ving.mvp.contract.FollowContract
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.mvp.presenter.FollowPresenter
+import com.xx.ving.net.exception.ErrorStatus
+import com.xx.ving.showToast
+import com.xx.ving.ui.adapter.FollowAdapter
 import kotlinx.android.synthetic.main.layout_recyclerview.*
 
 /**

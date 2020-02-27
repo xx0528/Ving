@@ -1,12 +1,12 @@
-package com.hazz.ving.ui.adapter
+package com.xx.ving.ui.adapter
 
 import android.content.Context
 import android.view.View
 import android.widget.TextView
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.hazz.ving.R
-import com.hazz.ving.view.recyclerview.ViewHolder
-import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
+import com.xx.ving.R
+import com.xx.ving.view.recyclerview.ViewHolder
+import com.xx.ving.view.recyclerview.adapter.CommonAdapter
 
 /**
  * Created by xuhao on 2017/12/4.

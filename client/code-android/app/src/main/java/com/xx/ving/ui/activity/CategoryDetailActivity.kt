@@ -1,19 +1,19 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.hazz.ving.Constants
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.glide.GlideApp
-import com.hazz.ving.mvp.contract.CategoryDetailContract
-import com.hazz.ving.mvp.model.bean.CategoryBean
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.mvp.presenter.CategoryDetailPresenter
-import com.hazz.ving.ui.adapter.CategoryDetailAdapter
-import com.hazz.ving.utils.StatusBarUtil
+import com.xx.ving.Constants
+import com.xx.ving.R
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.glide.GlideApp
+import com.xx.ving.mvp.contract.CategoryDetailContract
+import com.xx.ving.mvp.model.bean.CategoryBean
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.mvp.presenter.CategoryDetailPresenter
+import com.xx.ving.ui.adapter.CategoryDetailAdapter
+import com.xx.ving.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_category_detail.*
 
 /**

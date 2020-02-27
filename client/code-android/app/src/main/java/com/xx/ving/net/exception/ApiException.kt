@@ -1,4 +1,4 @@
-package com.hazz.ving.net.exception
+package com.xx.ving.net.exception
 
 /**
  * Created by xuhao on 2017/12/5.

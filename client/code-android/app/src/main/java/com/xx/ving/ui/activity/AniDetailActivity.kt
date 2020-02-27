@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.annotation.TargetApi
 import android.content.res.Configuration
@@ -9,20 +9,16 @@ import android.transition.Transition
 import android.widget.ImageView
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.hazz.ving.Constants
-import com.hazz.ving.MyApplication
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.glide.GlideApp
-import com.hazz.ving.mvp.contract.AniDetailContract
-import com.hazz.ving.mvp.model.bean.AniBean
-import com.hazz.ving.mvp.presenter.AniDetailPresenter
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.adapter.AniDetailAdapter
-import com.hazz.ving.utils.CleanLeakUtils
-import com.hazz.ving.utils.StatusBarUtil
-import com.hazz.ving.utils.WatchHistoryUtils
-import com.hazz.ving.view.VideoListener
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.glide.GlideApp
+import com.xx.ving.mvp.contract.AniDetailContract
+import com.xx.ving.mvp.model.bean.AniBean
+import com.xx.ving.mvp.presenter.AniDetailPresenter
+import com.xx.ving.ui.adapter.AniDetailAdapter
+import com.xx.ving.utils.CleanLeakUtils
+import com.xx.ving.utils.StatusBarUtil
+import com.xx.ving.utils.WatchHistoryUtils
+import com.xx.ving.view.VideoListener
 import com.scwang.smartrefresh.header.MaterialHeader
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import java.text.SimpleDateFormat
@@ -30,6 +26,7 @@ import java.util.*
 import com.orhanobut.logger.Logger
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
+import com.xx.ving.*
 import kotlinx.android.synthetic.main.activity_ani_detail.*
 import kotlin.collections.ArrayList
 
@@ -246,6 +243,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         mMaterialHeader?.setShowBezierWave(true)
         //设置下拉主题颜色
         mRefreshLayout.setPrimaryColorsId(R.color.color_lighter_gray, R.color.color_title_bg)
+
     }
 
     override fun start() {
@@ -261,6 +259,11 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
     override fun setAniInfo(itemInfo: AniBean.AItem) {
         itemData = itemInfo
         mAdapter.addData(itemInfo)
+
+        tv_action_favorites.text = itemData.data?.consumption?.collectionCount.toString()
+        tv_action_share.text = itemData.data?.consumption?.shareCount.toString()
+        tv_action_reply.text = itemData.data?.consumption?.replyCount.toString()
+
         // 请求相关最新视频
         itemInfo.data?.id?.let { mPresenter.requestRelatedAni(it) }
     }

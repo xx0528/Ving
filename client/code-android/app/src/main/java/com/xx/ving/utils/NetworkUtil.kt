@@ -1,4 +1,4 @@
-package com.hazz.ving.utils
+package com.xx.ving.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

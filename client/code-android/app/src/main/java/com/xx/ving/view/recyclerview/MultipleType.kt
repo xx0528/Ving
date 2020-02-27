@@ -1,4 +1,4 @@
-package com.hazz.ving.view.recyclerview
+package com.xx.ving.view.recyclerview
 
 /**
  * Created by xuhao on 2017/11/22.

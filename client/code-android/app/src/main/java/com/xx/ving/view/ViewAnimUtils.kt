@@ -1,4 +1,4 @@
-package com.hazz.ving.view
+package com.xx.ving.view
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

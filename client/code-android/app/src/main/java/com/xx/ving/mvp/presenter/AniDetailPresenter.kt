@@ -1,12 +1,12 @@
-package com.hazz.ving.mvp.presenter
+package com.xx.ving.mvp.presenter
 
-import com.hazz.ving.MyApplication
-import com.hazz.ving.base.BasePresenter
-import com.hazz.ving.mvp.contract.AniDetailContract
-import com.hazz.ving.mvp.model.AniDetailModel
-import com.hazz.ving.mvp.model.bean.AniBean
-import com.hazz.ving.utils.DisplayManager
-import com.hazz.ving.utils.NetworkUtil
+import com.xx.ving.MyApplication
+import com.xx.ving.base.BasePresenter
+import com.xx.ving.mvp.contract.AniDetailContract
+import com.xx.ving.mvp.model.AniDetailModel
+import com.xx.ving.mvp.model.bean.AniBean
+import com.xx.ving.utils.DisplayManager
+import com.xx.ving.utils.NetworkUtil
 
 /**
  * Created by xx on 2020/2/25 21:29.
@@ -20,7 +20,7 @@ class AniDetailPresenter : BasePresenter<AniDetailContract.View>(), AniDetailCon
 
     override fun loadAniInfo(itemInfo: AniBean.AItem) {
 
-        val netType = NetworkUtil.isWifi(MyApplication.context)
+//        val netType = NetworkUtil.isWifi(MyApplication.context)
         // 检测是否绑定 View
         checkViewAttached()
 

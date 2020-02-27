@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentTransaction
 import android.view.KeyEvent
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.mvp.model.bean.TabEntity
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.fragment.*
+import com.xx.ving.R
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.mvp.model.bean.TabEntity
+import com.xx.ving.showToast
+import com.xx.ving.ui.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 

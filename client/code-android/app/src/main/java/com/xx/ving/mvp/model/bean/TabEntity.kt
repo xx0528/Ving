@@ -1,4 +1,4 @@
-package com.hazz.ving.mvp.model.bean
+package com.xx.ving.mvp.model.bean
 
 import com.flyco.tablayout.listener.CustomTabEntity
 

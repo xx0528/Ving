@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -7,10 +7,10 @@ import android.graphics.Typeface
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
-import com.hazz.ving.MyApplication
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.utils.AppUtils
+import com.xx.ving.MyApplication
+import com.xx.ving.R
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.utils.AppUtils
 import kotlinx.android.synthetic.main.activity_splash.*
 import pub.devrel.easypermissions.EasyPermissions
 

@@ -11,7 +11,10 @@
         android:layout_height="wrap_content"
         android:background="#FAFAF3"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,10 +29,10 @@
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="这家解忧杂货铺，用音乐治愈你！" />
 
@@ -37,11 +40,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_tag"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
                     android:singleLine="true"
                     android:textColor="@color/color_gray"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     tools:text="#动漫/热血" />
 
             </LinearLayout>
@@ -51,9 +54,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/expandable_text"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/color_lighter_gray"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/color_gray"
             android:textSize="12sp"
             tools:text="亚当是个喜欢在学校惹是生非的青少年" />
     </LinearLayout>
@@ -72,10 +75,12 @@
 
         <ImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:layout_margin="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             tools:src="@mipmap/default_avatar" />
 
         <TextView
@@ -84,12 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="25dp"
             android:background="@drawable/btn_radius_normal_bg"
-            android:paddingLeft="7dp"
-            android:paddingTop="3dp"
-            android:paddingRight="7dp"
-            android:paddingBottom="3dp"
             android:text="+ 关注"
             android:textColor="@color/color_orange"
             android:textSize="12sp" />
@@ -146,7 +147,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:layout_margin="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -156,6 +157,7 @@
                 android:text="选集" />
 
             <TextView
+                android:id="@+id/tv_ani_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -165,10 +167,6 @@
                 android:text="共33集" />
 
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -180,6 +178,8 @@
                 android:id="@+id/rv_selections"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="14dp"
                 android:clipToPadding="false" />
 
         </LinearLayout>

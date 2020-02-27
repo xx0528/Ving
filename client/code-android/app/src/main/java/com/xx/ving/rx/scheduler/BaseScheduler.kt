@@ -1,4 +1,4 @@
-package com.hazz.ving.rx.scheduler
+package com.xx.ving.rx.scheduler
 
 import io.reactivex.*
 import org.reactivestreams.Publisher

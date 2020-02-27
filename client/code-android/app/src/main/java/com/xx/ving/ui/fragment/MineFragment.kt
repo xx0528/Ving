@@ -1,15 +1,15 @@
-package com.hazz.ving.ui.fragment
+package com.xx.ving.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseFragment
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.activity.AboutActivity
-import com.hazz.ving.ui.activity.ProfileHomePageActivity
-import com.hazz.ving.ui.activity.WatchHistoryActivity
-import com.hazz.ving.utils.StatusBarUtil
+import com.xx.ving.R
+import com.xx.ving.base.BaseFragment
+import com.xx.ving.showToast
+import com.xx.ving.ui.activity.AboutActivity
+import com.xx.ving.ui.activity.ProfileHomePageActivity
+import com.xx.ving.ui.activity.WatchHistoryActivity
+import com.xx.ving.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**

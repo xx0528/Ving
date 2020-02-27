@@ -1,4 +1,4 @@
-package com.hazz.ving.view
+package com.xx.ving.view
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
-import com.hazz.ving.R
+import com.xx.ving.R
 
 /**
  * Created by xuhao on 2017/12/4.

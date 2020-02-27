@@ -1,14 +1,14 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.support.v7.widget.LinearLayoutManager
-import com.hazz.ving.Constants
-import com.hazz.ving.MyApplication
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.ui.adapter.WatchHistoryAdapter
-import com.hazz.ving.utils.StatusBarUtil
-import com.hazz.ving.utils.WatchHistoryUtils
+import com.xx.ving.Constants
+import com.xx.ving.MyApplication
+import com.xx.ving.R
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.ui.adapter.WatchHistoryAdapter
+import com.xx.ving.utils.StatusBarUtil
+import com.xx.ving.utils.WatchHistoryUtils
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.layout_recyclerview.*
 import java.util.*

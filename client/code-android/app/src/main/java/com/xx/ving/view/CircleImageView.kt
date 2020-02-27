@@ -1,4 +1,4 @@
-package com.hazz.ving.view
+package com.xx.ving.view
 
 import android.content.Context
 import android.graphics.*
@@ -6,7 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import com.hazz.ving.R
+import com.xx.ving.R
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
 /**

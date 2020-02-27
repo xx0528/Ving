@@ -1,4 +1,4 @@
-package com.hazz.ving
+package com.xx.ving
 
 import android.content.Context
 import android.support.v4.app.Fragment

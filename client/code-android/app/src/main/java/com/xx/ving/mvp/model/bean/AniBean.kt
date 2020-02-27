@@ -1,4 +1,4 @@
-package com.hazz.ving.mvp.model.bean
+package com.xx.ving.mvp.model.bean
 
 import java.io.Serializable
 
@@ -17,6 +17,7 @@ data class AniBean(val aType: String, val releaseTime: Long, val date: Long, val
                          val author: Author,
                          val cover: Cover,
                          val category: String,
+                         val consumption: Consumption,
                          val likeCount: Int,
                          val score: Float,
                          val playUrl: String,
@@ -39,6 +40,8 @@ data class AniBean(val aType: String, val releaseTime: Long, val date: Long, val
                             data class Author(val id: Int, val videoNum: Int, val icon: String, val name: String, val description: String) : Serializable
 
                             data class Cover(val feed: String, val detail: String, val blurred: String, val sharing: String, val homepage: String) : Serializable
+
+                            data class Consumption(val collectionCount: Int, val shareCount: Int, val replyCount: Int) : Serializable
                         }
     }
 }

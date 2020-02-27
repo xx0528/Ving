@@ -1,4 +1,4 @@
-package com.hazz.ving.view;
+package com.xx.ving.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,7 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.hazz.ving.R;
+import com.xx.ving.R;
 
 import java.lang.ref.WeakReference;
 

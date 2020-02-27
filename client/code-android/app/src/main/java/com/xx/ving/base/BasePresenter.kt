@@ -1,4 +1,4 @@
-package com.hazz.ving.base
+package com.xx.ving.base
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

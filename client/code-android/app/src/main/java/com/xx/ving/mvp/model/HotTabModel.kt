@@ -1,8 +1,8 @@
-package com.hazz.ving.mvp.model
+package com.xx.ving.mvp.model
 
-import com.hazz.ving.mvp.model.bean.TabInfoBean
-import com.hazz.ving.net.RetrofitManager
-import com.hazz.ving.rx.scheduler.SchedulerUtils
+import com.xx.ving.mvp.model.bean.TabInfoBean
+import com.xx.ving.net.RetrofitManager
+import com.xx.ving.rx.scheduler.SchedulerUtils
 import io.reactivex.Observable
 
 /**

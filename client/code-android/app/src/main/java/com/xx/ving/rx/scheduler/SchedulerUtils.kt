@@ -1,4 +1,4 @@
-package com.hazz.ving.rx.scheduler
+package com.xx.ving.rx.scheduler
 
 /**
  * Created by xuhao on 2017/11/17.

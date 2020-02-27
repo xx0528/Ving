@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.fragment
+package com.xx.ving.ui.fragment
 
 import android.content.Intent
 import android.os.Build
@@ -7,16 +7,16 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseFragment
-import com.hazz.ving.mvp.contract.HomeContract
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.mvp.presenter.HomePresenter
-import com.hazz.ving.net.exception.ErrorStatus
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.activity.SearchActivity
-import com.hazz.ving.ui.adapter.HomeAdapter
-import com.hazz.ving.utils.StatusBarUtil
+import com.xx.ving.R
+import com.xx.ving.base.BaseFragment
+import com.xx.ving.mvp.contract.HomeContract
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.mvp.presenter.HomePresenter
+import com.xx.ving.net.exception.ErrorStatus
+import com.xx.ving.showToast
+import com.xx.ving.ui.activity.SearchActivity
+import com.xx.ving.ui.adapter.HomeAdapter
+import com.xx.ving.utils.StatusBarUtil
 import com.orhanobut.logger.Logger
 import com.scwang.smartrefresh.header.MaterialHeader
 import kotlinx.android.synthetic.main.fragment_home.*

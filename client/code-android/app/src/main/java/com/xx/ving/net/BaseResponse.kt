@@ -1,4 +1,4 @@
-package com.hazz.ving.net
+package com.xx.ving.net
 
 /**
  * Created by xuhao on 2017/11/16.

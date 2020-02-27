@@ -1,16 +1,16 @@
-package com.hazz.ving.ui.fragment
+package com.xx.ving.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseFragment
-import com.hazz.ving.base.BaseFragmentAdapter
-import com.hazz.ving.mvp.contract.HotTabContract
-import com.hazz.ving.mvp.model.bean.TabInfoBean
-import com.hazz.ving.mvp.presenter.HotTabPresenter
-import com.hazz.ving.net.exception.ErrorStatus
-import com.hazz.ving.showToast
-import com.hazz.ving.utils.StatusBarUtil
+import com.xx.ving.R
+import com.xx.ving.base.BaseFragment
+import com.xx.ving.base.BaseFragmentAdapter
+import com.xx.ving.mvp.contract.HotTabContract
+import com.xx.ving.mvp.model.bean.TabInfoBean
+import com.xx.ving.mvp.presenter.HotTabPresenter
+import com.xx.ving.net.exception.ErrorStatus
+import com.xx.ving.showToast
+import com.xx.ving.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_hot.*
 
 /**

@@ -1,19 +1,19 @@
-package com.hazz.ving.ui.fragment
+package com.xx.ving.ui.fragment
 
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseFragment
-import com.hazz.ving.mvp.contract.CategoryContract
-import com.hazz.ving.mvp.model.bean.CategoryBean
-import com.hazz.ving.mvp.presenter.CategoryPresenter
-import com.hazz.ving.net.exception.ErrorStatus
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.adapter.CategoryAdapter
-import com.hazz.ving.utils.DisplayManager
+import com.xx.ving.R
+import com.xx.ving.base.BaseFragment
+import com.xx.ving.mvp.contract.CategoryContract
+import com.xx.ving.mvp.model.bean.CategoryBean
+import com.xx.ving.mvp.presenter.CategoryPresenter
+import com.xx.ving.net.exception.ErrorStatus
+import com.xx.ving.showToast
+import com.xx.ving.ui.adapter.CategoryAdapter
+import com.xx.ving.utils.DisplayManager
 import kotlinx.android.synthetic.main.fragment_category.*
 
 /**

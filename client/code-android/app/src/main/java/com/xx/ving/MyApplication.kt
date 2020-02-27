@@ -1,11 +1,11 @@
-package com.hazz.ving
+package com.xx.ving
 
 import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import com.hazz.ving.utils.DisplayManager
+import com.xx.ving.utils.DisplayManager
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy

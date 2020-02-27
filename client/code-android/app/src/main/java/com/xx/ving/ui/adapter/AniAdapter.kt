@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.adapter
+package com.xx.ving.ui.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,13 +11,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.hazz.ving.Constants
-import com.hazz.ving.R
-import com.hazz.ving.glide.GlideApp
-import com.hazz.ving.mvp.model.bean.AniBean
-import com.hazz.ving.ui.activity.AniDetailActivity
-import com.hazz.ving.view.recyclerview.ViewHolder
-import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
+import com.xx.ving.Constants
+import com.xx.ving.R
+import com.xx.ving.glide.GlideApp
+import com.xx.ving.mvp.model.bean.AniBean
+import com.xx.ving.ui.activity.AniDetailActivity
+import com.xx.ving.view.recyclerview.ViewHolder
+import com.xx.ving.view.recyclerview.adapter.CommonAdapter
 import com.orhanobut.logger.Logger
 
 /**

@@ -1,4 +1,4 @@
-package com.hazz.ving.view.recyclerview
+package com.xx.ving.view.recyclerview
 
 import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView

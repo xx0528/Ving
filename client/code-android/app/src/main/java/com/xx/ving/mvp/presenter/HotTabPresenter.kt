@@ -1,9 +1,9 @@
-package com.hazz.ving.mvp.presenter
+package com.xx.ving.mvp.presenter
 
-import com.hazz.ving.base.BasePresenter
-import com.hazz.ving.mvp.contract.HotTabContract
-import com.hazz.ving.mvp.model.HotTabModel
-import com.hazz.ving.net.exception.ExceptionHandle
+import com.xx.ving.base.BasePresenter
+import com.xx.ving.mvp.contract.HotTabContract
+import com.xx.ving.mvp.model.HotTabModel
+import com.xx.ving.net.exception.ExceptionHandle
 
 /**
  * Created by xuhao on 2017/11/30.

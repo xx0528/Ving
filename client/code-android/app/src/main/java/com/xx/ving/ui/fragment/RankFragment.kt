@@ -1,15 +1,15 @@
-package com.hazz.ving.ui.fragment
+package com.xx.ving.ui.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseFragment
-import com.hazz.ving.mvp.contract.RankContract
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.mvp.presenter.RankPresenter
-import com.hazz.ving.net.exception.ErrorStatus
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.adapter.CategoryDetailAdapter
+import com.xx.ving.R
+import com.xx.ving.base.BaseFragment
+import com.xx.ving.mvp.contract.RankContract
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.mvp.presenter.RankPresenter
+import com.xx.ving.net.exception.ErrorStatus
+import com.xx.ving.showToast
+import com.xx.ving.ui.adapter.CategoryDetailAdapter
 import kotlinx.android.synthetic.main.fragment_rank.*
 
 /**

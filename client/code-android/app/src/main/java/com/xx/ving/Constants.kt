@@ -1,4 +1,4 @@
-package com.hazz.ving
+package com.xx.ving
 
 //  ┏┓　　　┏┓
 //┏┛┻━━━┛┻┓

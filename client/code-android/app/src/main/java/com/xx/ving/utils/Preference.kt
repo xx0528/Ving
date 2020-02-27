@@ -1,9 +1,9 @@
-package com.hazz.ving.utils
+package com.xx.ving.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import com.hazz.ving.MyApplication
+import com.xx.ving.MyApplication
 import java.io.*
 import kotlin.reflect.KProperty
 

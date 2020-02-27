@@ -1,4 +1,4 @@
-package com.hazz.ving.glide
+package com.xx.ving.glide
 
 import com.bumptech.glide.load.Options
 import com.bumptech.glide.load.model.*

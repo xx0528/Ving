@@ -1,11 +1,11 @@
-package com.hazz.ving.net
+package com.xx.ving.net
 
-import com.hazz.ving.MyApplication
-import com.hazz.ving.api.ApiService
-import com.hazz.ving.api.UrlConstant
-import com.hazz.ving.utils.AppUtils
-import com.hazz.ving.utils.NetworkUtil
-import com.hazz.ving.utils.Preference
+import com.xx.ving.MyApplication
+import com.xx.ving.api.ApiService
+import com.xx.ving.api.UrlConstant
+import com.xx.ving.utils.AppUtils
+import com.xx.ving.utils.NetworkUtil
+import com.xx.ving.utils.Preference
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

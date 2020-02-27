@@ -1,4 +1,4 @@
-package com.hazz.ving.base
+package com.xx.ving.base
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import com.classic.common.MultipleStatusView
-import com.hazz.ving.MyApplication
+import com.xx.ving.MyApplication
 import io.reactivex.annotations.NonNull
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions

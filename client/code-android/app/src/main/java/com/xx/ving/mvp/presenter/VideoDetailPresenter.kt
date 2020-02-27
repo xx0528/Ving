@@ -1,16 +1,16 @@
-package com.hazz.ving.mvp.presenter
+package com.xx.ving.mvp.presenter
 
 import android.app.Activity
-import com.hazz.ving.MyApplication
-import com.hazz.ving.base.BasePresenter
-import com.hazz.ving.dataFormat
-import com.hazz.ving.mvp.contract.VideoDetailContract
-import com.hazz.ving.mvp.model.VideoDetailModel
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.net.exception.ExceptionHandle
-import com.hazz.ving.showToast
-import com.hazz.ving.utils.DisplayManager
-import com.hazz.ving.utils.NetworkUtil
+import com.xx.ving.MyApplication
+import com.xx.ving.base.BasePresenter
+import com.xx.ving.dataFormat
+import com.xx.ving.mvp.contract.VideoDetailContract
+import com.xx.ving.mvp.model.VideoDetailModel
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.net.exception.ExceptionHandle
+import com.xx.ving.showToast
+import com.xx.ving.utils.DisplayManager
+import com.xx.ving.utils.NetworkUtil
 
 /**
  * Created by xuhao on 2017/11/25.

@@ -1,12 +1,12 @@
-package com.hazz.ving.ui.fragment
+package com.xx.ving.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseFragment
-import com.hazz.ving.base.BaseFragmentAdapter
-import com.hazz.ving.utils.StatusBarUtil
-import com.hazz.ving.view.TabLayoutHelper
+import com.xx.ving.R
+import com.xx.ving.base.BaseFragment
+import com.xx.ving.base.BaseFragmentAdapter
+import com.xx.ving.utils.StatusBarUtil
+import com.xx.ving.view.TabLayoutHelper
 import kotlinx.android.synthetic.main.fragment_hot.*
 
 /**

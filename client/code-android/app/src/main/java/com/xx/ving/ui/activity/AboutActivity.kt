@@ -1,13 +1,13 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import com.hazz.ving.MyApplication
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.utils.AppUtils
-import com.hazz.ving.utils.StatusBarUtil
+import com.xx.ving.MyApplication
+import com.xx.ving.R
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.utils.AppUtils
+import com.xx.ving.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_about.*
 
 /**

@@ -1,4 +1,4 @@
-package com.hazz.ving.api
+package com.xx.ving.api
 
 /**
  * Created by xuhao on 2017/11/16.

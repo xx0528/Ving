@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.adapter
+package com.xx.ving.ui.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -6,12 +6,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.hazz.ving.R
-import com.hazz.ving.glide.GlideApp
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.view.recyclerview.MultipleType
-import com.hazz.ving.view.recyclerview.ViewHolder
-import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
+import com.xx.ving.R
+import com.xx.ving.glide.GlideApp
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.view.recyclerview.MultipleType
+import com.xx.ving.view.recyclerview.ViewHolder
+import com.xx.ving.view.recyclerview.adapter.CommonAdapter
 
 /**
  * Created by xuhao on 2017/12/7.

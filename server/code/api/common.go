@@ -193,6 +193,11 @@ func (a *CommonAPI) GetAniList(aType string, num int, category string, aniID int
 		coverData["detail"] = "http://img.kaiyanapp.com/543451a3991b08eabb1a5f8a2f9f5d39.jpeg?imageMogr2/quality/60/format/jpg"
 		coverData["homepage"] = "http://img.kaiyanapp.com/543451a3991b08eabb1a5f8a2f9f5d39.jpeg?imageView2/1/w/720/h/560/format/jpg/q/75|watermark/1/image/aHR0cDovL2ltZy5rYWl5YW5hcHAuY29tL2JsYWNrXzMwLnBuZw==/dissolve/100/gravity/Center/dx/0/dy/0|imageslim"
 
+		var consumption = make(map[string]interface{})
+		consumption["collectionCount"] = rand.Intn(50000)
+		consumption["shareCount"] = rand.Intn(50000)
+		consumption["replyCount"] = rand.Intn(50000)
+
 		var data = make(map[string]interface{})
 		data["id"] = 50000 + rand.Intn(10000)
 		data["name"] = fmt.Sprintf("动画名字--%d", i)
@@ -219,6 +224,7 @@ func (a *CommonAPI) GetAniList(aType string, num int, category string, aniID int
 		data["played"] = false
 		data["subtitles"] = "动画子标题"
 		data["lastViewTime"] = "最后观看时间"
+		data["consumption"] = consumption
 
 		var aniData = make(map[string]interface{})
 		aniData["aType"] = "AnimationType"

@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.adapter
+package com.xx.ving.ui.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -6,15 +6,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
-import com.hazz.ving.R
-import com.hazz.ving.durationFormat
-import com.hazz.ving.glide.GlideApp
-import com.hazz.ving.mvp.model.bean.AniBean
-import com.hazz.ving.view.recyclerview.MultipleType
-import com.hazz.ving.view.recyclerview.ViewHolder
-import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
+import com.xx.ving.R
+import com.xx.ving.durationFormat
+import com.xx.ving.glide.GlideApp
+import com.xx.ving.mvp.model.bean.AniBean
+import com.xx.ving.view.recyclerview.MultipleType
+import com.xx.ving.view.recyclerview.ViewHolder
+import com.xx.ving.view.recyclerview.adapter.CommonAdapter
 import com.orhanobut.logger.Logger
-import com.xx.ving.ui.adapter.AniDetailSelectionAdapter
 
 /**
  * Created by xx on 2020/2/25 21:46.
@@ -67,7 +66,7 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
      * 绑定数据
      */
     override fun bindData(holder: ViewHolder, data: AniBean.AItem, position: Int) {
-        Logger.d("bind data ------%d", position)
+//        Logger.d("bind data ------%d", position)
 
         when {
             position == 0 -> setAniDetailInfo(data, holder)
@@ -91,12 +90,14 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
         data.data?.title?.let { holder.setText(R.id.expandable_text, it) }
         holder.setText(R.id.tv_tag, "#${data.data?.category} / ${durationFormat(data.data?.duration)}")
 
-        Logger.d("set detail info data ------")
+//        Logger.d("set detail info data ------")
 
         if (data.data?.author != null) {
             with(holder) {
                 setText(R.id.tv_author_name, data.data.author.name)
                 setText(R.id.tv_author_desc, data.data.author.description)
+                setText(R.id.tv_ani_num, data.data.aniNum.toString()+"集全")
+
                 setImagePath(R.id.iv_avatar, object : ViewHolder.HolderImageLoader(data.data.author.icon) {
                     override fun loadImage(iv: ImageView, path: String) {
                         //加载头像
@@ -114,28 +115,17 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
         /**
          * 设置嵌套水平的 RecyclerView
          */
-        Logger.d("set detail 设置嵌套水平的 ------1")
-//        val recyclerView = holder.getView<RecyclerView>(R.id.rv_selections)
-//        recyclerView.layoutManager = LinearLayoutManager(mContext as Activity,LinearLayoutManager.HORIZONTAL,false)
-//
-//        Logger.d("set detail 设置嵌套水平的 ------2")
-//        var selections = ArrayList<Int>(data.data?.aniNum ?: 10)
-//        for (index in 1..(selections.size)){
-//            selections[index] = index
-//        }
-//        Logger.d("set detail 设置嵌套水平的 ------3")
-//        val adapter = AniDetailSelectionAdapter(mContext, selections, R.layout.item_ani_selection)
-//        adapter.setData(data)
-//        Logger.d("set detail 设置嵌套水平的 ------4")
-//        recyclerView.adapter = adapter
+        val num = data.data?.aniNum ?: 10
+        var selections = ArrayList<Int>()
+        for (index in 1..num){
+            selections.add(index)
+        }
 
-
-//        val recyclerView = holder.getView<RecyclerView>(R.id.rv_selections)
-//        /**
-//         * 设置嵌套水平的 RecyclerView
-//         */
-//        recyclerView.layoutManager = LinearLayoutManager(mContext as Activity,LinearLayoutManager.HORIZONTAL,false)
-//        recyclerView.adapter = AniDetailSelectionAdapter(mContext,item.data.itemList,R.layout.item_follow_horizontal)
+        val adapter = AniDetailSelectionAdapter(mContext, selections, R.layout.item_ani_selection)
+        val recyclerView = holder.getView<RecyclerView>(R.id.rv_selections)
+        recyclerView.layoutManager = LinearLayoutManager(mContext as Activity,LinearLayoutManager.HORIZONTAL,false)
+        recyclerView.adapter = adapter
+        adapter.setData(data)
 
     }
 }

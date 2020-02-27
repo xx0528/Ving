@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.activity
+package com.xx.ving.ui.activity
 
 import android.annotation.TargetApi
 import android.graphics.Typeface
@@ -14,19 +14,19 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.google.android.flexbox.*
-import com.hazz.ving.MyApplication
-import com.hazz.ving.R
-import com.hazz.ving.base.BaseActivity
-import com.hazz.ving.mvp.contract.SearchContract
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.mvp.presenter.SearchPresenter
-import com.hazz.ving.net.exception.ErrorStatus
-import com.hazz.ving.showToast
-import com.hazz.ving.ui.adapter.CategoryDetailAdapter
-import com.hazz.ving.ui.adapter.HotKeywordsAdapter
-import com.hazz.ving.utils.CleanLeakUtils
-import com.hazz.ving.utils.StatusBarUtil
-import com.hazz.ving.view.ViewAnimUtils
+import com.xx.ving.MyApplication
+import com.xx.ving.R
+import com.xx.ving.base.BaseActivity
+import com.xx.ving.mvp.contract.SearchContract
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.mvp.presenter.SearchPresenter
+import com.xx.ving.net.exception.ErrorStatus
+import com.xx.ving.showToast
+import com.xx.ving.ui.adapter.CategoryDetailAdapter
+import com.xx.ving.ui.adapter.HotKeywordsAdapter
+import com.xx.ving.utils.CleanLeakUtils
+import com.xx.ving.utils.StatusBarUtil
+import com.xx.ving.view.ViewAnimUtils
 import kotlinx.android.synthetic.main.activity_search.*
 
 /**

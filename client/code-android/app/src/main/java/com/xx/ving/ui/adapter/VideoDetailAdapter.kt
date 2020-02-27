@@ -1,4 +1,4 @@
-package com.hazz.ving.ui.adapter
+package com.xx.ving.ui.adapter
 
 import android.content.Context
 import android.graphics.Typeface
@@ -6,15 +6,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.hazz.ving.MyApplication
-import com.hazz.ving.R
-import com.hazz.ving.durationFormat
-import com.hazz.ving.glide.GlideApp
-import com.hazz.ving.glide.GlideRoundTransform
-import com.hazz.ving.mvp.model.bean.HomeBean
-import com.hazz.ving.view.recyclerview.MultipleType
-import com.hazz.ving.view.recyclerview.ViewHolder
-import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
+import com.xx.ving.MyApplication
+import com.xx.ving.R
+import com.xx.ving.durationFormat
+import com.xx.ving.glide.GlideApp
+import com.xx.ving.glide.GlideRoundTransform
+import com.xx.ving.mvp.model.bean.HomeBean
+import com.xx.ving.view.recyclerview.MultipleType
+import com.xx.ving.view.recyclerview.ViewHolder
+import com.xx.ving.view.recyclerview.adapter.CommonAdapter
 
 /**
  * Created by xuhao on 2017/11/25.

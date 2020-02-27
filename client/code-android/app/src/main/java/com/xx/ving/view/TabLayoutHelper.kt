@@ -1,10 +1,10 @@
-package com.hazz.ving.view
+package com.xx.ving.view
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.support.design.widget.TabLayout
 import android.widget.LinearLayout
-import com.hazz.ving.utils.DisplayManager
+import com.xx.ving.utils.DisplayManager
 import java.lang.reflect.Field
 
 /**

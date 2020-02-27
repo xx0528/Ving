@@ -1,4 +1,4 @@
-package com.hazz.ving.utils
+package com.xx.ving.utils
 
 import android.annotation.TargetApi
 import android.app.Activity

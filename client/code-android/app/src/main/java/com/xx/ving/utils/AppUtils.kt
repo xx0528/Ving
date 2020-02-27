@@ -1,4 +1,4 @@
-package com.hazz.ving.utils
+package com.xx.ving.utils
 
 import android.annotation.SuppressLint
 import android.app.ActivityManager

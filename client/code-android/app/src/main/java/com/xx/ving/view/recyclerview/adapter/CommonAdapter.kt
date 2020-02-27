@@ -1,12 +1,12 @@
-package com.hazz.ving.view.recyclerview.adapter
+package com.xx.ving.view.recyclerview.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-import com.hazz.ving.view.recyclerview.MultipleType
-import com.hazz.ving.view.recyclerview.ViewHolder
+import com.xx.ving.view.recyclerview.MultipleType
+import com.xx.ving.view.recyclerview.ViewHolder
 
 /**
  * Created by xuhao on 2017/11/22.

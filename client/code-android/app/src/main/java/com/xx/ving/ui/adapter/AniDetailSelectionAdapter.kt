@@ -7,12 +7,12 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.view.View
-import com.hazz.ving.Constants
-import com.hazz.ving.R
-import com.hazz.ving.mvp.model.bean.AniBean
-import com.hazz.ving.ui.activity.AniDetailActivity
-import com.hazz.ving.view.recyclerview.ViewHolder
-import com.hazz.ving.view.recyclerview.adapter.CommonAdapter
+import com.xx.ving.Constants
+import com.xx.ving.R
+import com.xx.ving.mvp.model.bean.AniBean
+import com.xx.ving.ui.activity.AniDetailActivity
+import com.xx.ving.view.recyclerview.ViewHolder
+import com.xx.ving.view.recyclerview.adapter.CommonAdapter
 import com.orhanobut.logger.Logger
 
 /**
@@ -24,13 +24,11 @@ class AniDetailSelectionAdapter (mContext: Context, selectionList: ArrayList<Int
 
     private var mAniData: AniBean.AItem? = null
 
-    override fun bindData(holder: ViewHolder, selection: Int, position: Int) {
-        Logger.d("AniDetailSelection =========== %d", position)
+    override fun bindData(holder: ViewHolder, data: Int, position: Int) {
 
-        holder.setText(R.id.tv_select_id, selection.toString())
+        holder.setText(R.id.tv_select_id, data.toString())
 
         with(holder) {
-            Logger.d("点击了集数--%d", selection)
             setOnItemClickListener(listener = View.OnClickListener {
                 mAniData?.let { it1 -> goToVideoPlayer(mContext as Activity, holder.getView(R.id.tv_select_id), it1) }
             })
@@ -58,8 +56,9 @@ class AniDetailSelectionAdapter (mContext: Context, selectionList: ArrayList<Int
     }
 
     fun setData(aniData: AniBean.AItem) {
-        Logger.d("AniDetailSelection 设置数据=========== ")
+//        Logger.d("AniDetailSelection 设置数据=========== ")
         mAniData = aniData
+        notifyDataSetChanged()
     }
 
 }

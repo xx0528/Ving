@@ -1,8 +1,8 @@
-package com.hazz.ving.mvp.presenter
+package com.xx.ving.mvp.presenter
 
-import com.hazz.ving.base.BasePresenter
-import com.hazz.ving.mvp.contract.CategoryDetailContract
-import com.hazz.ving.mvp.model.CategoryDetailModel
+import com.xx.ving.base.BasePresenter
+import com.xx.ving.mvp.contract.CategoryDetailContract
+import com.xx.ving.mvp.model.CategoryDetailModel
 
 /**
  * Created by xuhao on 2017/11/30.

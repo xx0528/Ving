@@ -1,8 +1,8 @@
-package com.hazz.ving.mvp.contract
+package com.xx.ving.mvp.contract
 
-import com.hazz.ving.base.IBaseView
-import com.hazz.ving.base.IPresenter
-import com.hazz.ving.mvp.model.bean.AniBean
+import com.xx.ving.base.IBaseView
+import com.xx.ving.base.IPresenter
+import com.xx.ving.mvp.model.bean.AniBean
 
 /**
  * Create by xx on 2020/02/23.

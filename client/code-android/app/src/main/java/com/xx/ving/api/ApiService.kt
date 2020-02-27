@@ -1,6 +1,6 @@
-package com.hazz.ving.api
+package com.xx.ving.api
 
-import com.hazz.ving.mvp.model.bean.*
+import com.xx.ving.mvp.model.bean.*
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

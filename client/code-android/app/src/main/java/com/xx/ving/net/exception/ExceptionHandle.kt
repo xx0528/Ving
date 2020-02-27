@@ -1,4 +1,4 @@
-package com.hazz.ving.net.exception
+package com.xx.ving.net.exception
 
 import com.google.gson.JsonParseException
 import com.orhanobut.logger.Logger

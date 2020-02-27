@@ -1,4 +1,4 @@
-package com.hazz.ving.view
+package com.xx.ving.view
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -14,7 +14,7 @@ import android.view.animation.Transformation
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.hazz.ving.R
+import com.xx.ving.R
 
 
 /**

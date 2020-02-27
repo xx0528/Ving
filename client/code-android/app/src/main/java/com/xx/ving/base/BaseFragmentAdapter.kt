@@ -1,4 +1,4 @@
-package com.hazz.ving.base
+package com.xx.ving.base
 
 import android.annotation.SuppressLint
 import android.support.v4.app.Fragment

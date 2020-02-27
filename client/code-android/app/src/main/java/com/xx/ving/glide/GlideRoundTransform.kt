@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.hazz.ving.glide
+package com.xx.ving.glide
 
 import android.content.res.Resources
 import android.graphics.Bitmap
