@@ -2,10 +2,12 @@ package com.xx.ving.ui.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Typeface
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.xx.ving.R
 import com.xx.ving.durationFormat
 import com.xx.ving.glide.GlideApp
@@ -14,6 +16,8 @@ import com.xx.ving.view.recyclerview.MultipleType
 import com.xx.ving.view.recyclerview.ViewHolder
 import com.xx.ving.view.recyclerview.adapter.CommonAdapter
 import com.orhanobut.logger.Logger
+import com.xx.ving.MyApplication
+import com.xx.ving.glide.GlideRoundTransform
 
 /**
  * Created by xx on 2020/2/25 21:46.
@@ -29,13 +33,19 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
                     aniList[position].aType == "textCard" ->
                         R.layout.item_ani_text_card
 
-                    aniList[position].aType == "videoSmallCard" ->
+                    aniList[position].aType == "aniSmallCard" ->
                         R.layout.item_ani_small_card
                     else ->
                         throw IllegalAccessException("Api 解析出错了，出现其他类型")
                 }
             }
         }) {
+
+    private var textTypeface: Typeface?=null
+
+    init {
+        textTypeface = Typeface.createFromAsset(MyApplication.context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
+    }
 
     /**
      * 添加动画的详细信息
@@ -72,10 +82,28 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
             position == 0 -> setAniDetailInfo(data, holder)
 
             data.aType == "textCard" -> {
+                holder.setText(R.id.tv_text_card, data.data?.text!!)
+                //设置方正兰亭细黑简体
+                holder.getView<TextView>(R.id.tv_text_card).typeface =textTypeface
 
             }
 
             data.aType == "aniSmallCard" -> {
+                with(holder) {
+                    setText(R.id.tv_title, data.data?.title!!)
+                    setText(R.id.tv_tag, "#${data.data.category} / ${durationFormat(data.data.duration)}")
+                    setImagePath(R.id.iv_ani_small_card, object : ViewHolder.HolderImageLoader(data.data.cover.detail) {
+                        override fun loadImage(iv: ImageView, path: String) {
+                            GlideApp.with(mContext)
+                                    .load(path)
+                                    .optionalTransform(GlideRoundTransform())
+                                    .placeholder(R.drawable.placeholder_banner)
+                                    .into(iv)
+                        }
+                    })
+                }
+                // 判断onItemClickRelatedVideo 并使用
+                holder.itemView.setOnClickListener { mOnItemClickRelatedAni?.invoke(data) }
 
             }
             else -> throw IllegalAccessException("Api 解析出错了，出现其他类型--" + data.aType)

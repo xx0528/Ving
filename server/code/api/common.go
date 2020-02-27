@@ -115,7 +115,7 @@ func (a *CommonAPI) GetAnimation(ctx *gin.Context) {
 	var aniData = make(map[string]interface{})
 	rand.Seed(time.Now().UnixNano())
 	num := 3 + rand.Intn(6)
-	aniData["itemList"] = a.GetAniList("common", num, "", 0, 0)
+	aniData["itemList"] = a.GetAniList("Video", num, "", 0, 0)
 
 	aniData["aType"] = "TypeAnimation"
 	aniData["releaseTime"] = time.Now().Unix() - int64(rand.Intn(1000))
@@ -134,7 +134,7 @@ func (a *CommonAPI) GetMoreAnimation(ctx *gin.Context) {
 	var aniData = make(map[string]interface{})
 	rand.Seed(time.Now().UnixNano())
 	num := 3 + rand.Intn(6)
-	aniData["itemList"] = a.GetAniList("common", num, "", 0, pageIdx)
+	aniData["itemList"] = a.GetAniList("Video", num, "", 0, pageIdx)
 	aniData["aType"] = "TypeAnimation"
 	aniData["releaseTime"] = time.Now().Unix() - int64(rand.Intn(1000))
 	aniData["date"] = time.Now().Unix() - int64(rand.Intn(1000))
@@ -153,9 +153,19 @@ func (a *CommonAPI) GetRelatedAnimation(ctx *gin.Context) {
 
 	var aniData = make(map[string]interface{})
 	rand.Seed(time.Now().UnixNano())
-	num := 3 + rand.Intn(6)
-	aniData["itemList"] = a.GetAniList("common", num, "", 0, iAniId)
 
+	var dataList []interface{}
+
+	for i := 0; i < 3; i++ {
+		dataList = append(dataList, a.GetTextCard("textCard"))
+		num := 3 + rand.Intn(6)
+		smailList := a.GetAniList("aniSmallCard", num, "", 0, iAniId)
+		for j := 0; j < len(smailList); j++ {
+			dataList = append(dataList, smailList[j])
+		}
+	}
+
+	aniData["itemList"] = dataList
 	aniData["aType"] = "TypeAnimation"
 	aniData["releaseTime"] = time.Now().Unix() - int64(rand.Intn(1000))
 	aniData["date"] = time.Now().Unix() - int64(rand.Intn(1000))
@@ -205,18 +215,18 @@ func (a *CommonAPI) GetAniList(aType string, num int, category string, aniID int
 		data["aniNum"] = 10 + rand.Intn(80)
 		data["curPlayNum"] = rand.Intn(10)
 		data["aniTitle"] = fmt.Sprintf("动画标题标题--%d", i)
-		data["dataType"] = "Animation"
+		data["dataType"] = fmt.Sprintf("Animation-%s", aType)
 		data["desc"] = fmt.Sprintf("动画描述-000%d", i)
 		data["author"] = authorData
 		data["cover"] = coverData
 		data["category"] = "动画分类"
 		data["likeCount"] = rand.Intn(100000)
 		data["score"] = float32(3+rand.Intn(7)) + (float32(rand.Intn(10)) / 10)
-		data["playUrl"] = "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=187478&resourceType=video&editionType=default&source=aliyun&playUrlType=url_oss"
+		data["playUrl"] = "http://ali.cdn.kaiyanapp.com/1582517488402_72e64987.mp4?auth_key=1582823404-0-0-73bf6c2341ca8fb63abd52377763062f"
 		data["duration"] = 50 + rand.Intn(200)
 		data["createTime"] = time.Now().Unix() - int64(rand.Intn(1000))
 		data["tags"] = tagList
-		data["aType"] = "动画类型"
+		data["aType"] = fmt.Sprintf("videoType-%s", aType)
 		data["date"] = time.Now().Unix() - int64(rand.Intn(1000))
 		data["idx"] = rand.Intn(100)
 		data["label"] = "动画标签"
@@ -227,11 +237,26 @@ func (a *CommonAPI) GetAniList(aType string, num int, category string, aniID int
 		data["consumption"] = consumption
 
 		var aniData = make(map[string]interface{})
-		aniData["aType"] = "AnimationType"
+		aniData["aType"] = aType
 		aniData["tag"] = "动画片"
 		aniData["data"] = data
 		aniList = append(aniList, aniData)
 	}
 
 	return
+}
+
+func (a *CommonAPI) GetTextCard(aType string) (aniData map[string]interface{}) {
+
+	var data = make(map[string]interface{})
+	data["id"] = 0
+	data["dataType"] = "TextCard"
+	data["text"] = "最新热血番"
+	data["aType"] = "header4"
+
+	aniData = make(map[string]interface{})
+	aniData["aType"] = aType
+	aniData["data"] = data
+
+	return aniData
 }

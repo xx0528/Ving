@@ -5,6 +5,7 @@ import com.xx.ving.base.BasePresenter
 import com.xx.ving.mvp.contract.AniDetailContract
 import com.xx.ving.mvp.model.AniDetailModel
 import com.xx.ving.mvp.model.bean.AniBean
+import com.xx.ving.net.exception.ExceptionHandle
 import com.xx.ving.utils.DisplayManager
 import com.xx.ving.utils.NetworkUtil
 
@@ -34,6 +35,20 @@ class AniDetailPresenter : BasePresenter<AniDetailContract.View>(), AniDetailCon
     }
 
     override fun requestRelatedAni(id: Long) {
+        mRootView?.showLoading()
+        val disposable = aniDetailModel.requestRelatedAniData(id)
+                .subscribe({aniData ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        setRecentRelatedAni(aniData.itemList)
+                    }
+                }, { t ->
+                    mRootView?.apply {
+                        dismissLoading()
+                        setErrorMsg(ExceptionHandle.handleException(t))
+                    }
+                })
 
+        addSubscription(disposable)
     }
 }

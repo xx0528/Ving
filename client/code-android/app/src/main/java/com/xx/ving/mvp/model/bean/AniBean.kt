@@ -11,6 +11,7 @@ data class AniBean(val aType: String, val releaseTime: Long, val date: Long, val
         data class AData(val id: Long,
                          val name: String,
                          val title: String,
+                         val text: String,
                          val aniTitle: String,
                          val dataType: String,
                          val desc: String,

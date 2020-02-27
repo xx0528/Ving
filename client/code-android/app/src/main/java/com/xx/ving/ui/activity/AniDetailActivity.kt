@@ -265,7 +265,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         tv_action_reply.text = itemData.data?.consumption?.replyCount.toString()
 
         // 请求相关最新视频
-        itemInfo.data?.id?.let { mPresenter.requestRelatedAni(it) }
+        mPresenter.requestRelatedAni(itemInfo.data?.id?:0)
     }
 
     override fun setBackground(url: String) {
