@@ -5,6 +5,7 @@ import com.hazz.ving.base.BasePresenter
 import com.hazz.ving.mvp.contract.AniDetailContract
 import com.hazz.ving.mvp.model.AniDetailModel
 import com.hazz.ving.mvp.model.bean.AniBean
+import com.hazz.ving.utils.DisplayManager
 import com.hazz.ving.utils.NetworkUtil
 
 /**
@@ -26,8 +27,8 @@ class AniDetailPresenter : BasePresenter<AniDetailContract.View>(), AniDetailCon
         itemInfo.data?.playUrl?.let { mRootView?.setAni(it) }
 
         //设置背景
-//        val backgroundUrl = itemInfo.data.cover.blurred + "/thumbnail/${DisplayManager.getScreenHeight()!! - DisplayManager.dip2px(250f)!!}x${DisplayManager.getScreenWidth()}"
-//        backgroundUrl.let { mRootView?.setBackground(it) }
+        val backgroundUrl = (itemInfo.data?.cover?.blurred ?: "") + "/thumbnail/${DisplayManager.getScreenHeight()!! - DisplayManager.dip2px(250f)!!}x${DisplayManager.getScreenWidth()}"
+        backgroundUrl.let { mRootView?.setBackground(it) }
 
         mRootView?.setAniInfo(itemInfo)
     }

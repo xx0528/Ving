@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.content.res.Configuration
 import android.os.Build
 import android.support.v4.view.ViewCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.transition.Transition
 import android.widget.ImageView
 import com.bumptech.glide.load.DecodeFormat
@@ -19,6 +20,7 @@ import com.hazz.ving.mvp.presenter.AniDetailPresenter
 import com.hazz.ving.showToast
 import com.hazz.ving.ui.adapter.AniDetailAdapter
 import com.hazz.ving.utils.CleanLeakUtils
+import com.hazz.ving.utils.StatusBarUtil
 import com.hazz.ving.utils.WatchHistoryUtils
 import com.hazz.ving.view.VideoListener
 import com.scwang.smartrefresh.header.MaterialHeader
@@ -221,7 +223,29 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         initTransition()
         initAniViewConfig()
 
+        mRecyclerView.layoutManager = LinearLayoutManager(this)
+        mRecyclerView.adapter = mAdapter
 
+        //设置相关视频Item的点击事件
+        mAdapter.setOnItemDetailClick { mPresenter.loadAniInfo(it) }
+
+        //状态栏透明和间距处理
+        StatusBarUtil.immersive(this)
+        StatusBarUtil.setPaddingSmart(this, mAniVideoView)
+
+        /***
+         * 下拉刷新
+         */
+        //内容跟随偏移
+        mRefreshLayout.setEnableHeaderTranslationContent(true)
+        mRefreshLayout.setOnRefreshListener {
+            loadAniInfo()
+        }
+        mMaterialHeader = mRefreshLayout.refreshHeader as MaterialHeader?
+        //打开下拉刷新区域背景
+        mMaterialHeader?.setShowBezierWave(true)
+        //设置下拉主题颜色
+        mRefreshLayout.setPrimaryColorsId(R.color.color_lighter_gray, R.color.color_title_bg)
     }
 
     override fun start() {
@@ -231,7 +255,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         Logger.d("playUrl:$url")
         mAniVideoView.setUp(url, false, "")
         //开始自动播放
-        mAniVideoView.startPlayLogic()
+//        mAniVideoView.startPlayLogic()
     }
 
     override fun setAniInfo(itemInfo: AniBean.AItem) {

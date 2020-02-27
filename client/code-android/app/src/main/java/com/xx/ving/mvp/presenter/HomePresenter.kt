@@ -47,8 +47,6 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
 
                     bannerHomeBean = homeBean //记录第一页是当做 banner 数据
 
-                    Logger.d("nextPageUrl--------:", homeBean.nextPageUrl)
-
                     //根据 nextPageUrl 请求下一页数据
                     homeModel.loadMoreData(homeBean.nextPageUrl)
                 }
