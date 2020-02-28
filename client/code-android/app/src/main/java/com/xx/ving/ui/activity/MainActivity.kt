@@ -1,11 +1,13 @@
 package com.xx.ving.ui.activity
 
 import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
 import android.view.KeyEvent
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
+import com.orhanobut.logger.Logger
 import com.xx.ving.R
 import com.xx.ving.base.BaseActivity
 import com.xx.ving.mvp.model.bean.TabEntity
@@ -25,12 +27,14 @@ import java.util.*
 class MainActivity : BaseActivity() {
 
 
-    private val mTitles = arrayOf("每日精选", "发现", "热门", "我的", "动漫")
+//    private val mTitles = arrayOf("动漫", "我的", "每日精选", "发现", "热门")
+
+    private val mTitles = arrayOf("动漫", "我的")
 
     // 未被选中的图标
-    private val mIconUnSelectIds = intArrayOf(R.mipmap.ic_home_normal, R.mipmap.ic_discovery_normal, R.mipmap.ic_hot_normal, R.mipmap.ic_mine_normal, R.mipmap.ic_animation_normal)
+    private val mIconUnSelectIds = intArrayOf(R.mipmap.ic_animation_normal, R.mipmap.ic_mine_normal, R.mipmap.ic_home_normal, R.mipmap.ic_discovery_normal, R.mipmap.ic_hot_normal)
     // 被选中的图标
-    private val mIconSelectIds = intArrayOf(R.mipmap.ic_home_selected, R.mipmap.ic_discovery_selected, R.mipmap.ic_hot_selected, R.mipmap.ic_mine_selected, R.mipmap.ic_animation_selected)
+    private val mIconSelectIds = intArrayOf(R.mipmap.ic_animation_selected, R.mipmap.ic_mine_selected, R.mipmap.ic_home_selected, R.mipmap.ic_discovery_selected, R.mipmap.ic_hot_selected)
 
     private val mTabEntities = ArrayList<CustomTabEntity>()
 
@@ -85,44 +89,50 @@ class MainActivity : BaseActivity() {
     private fun switchFragment(position: Int) {
         val transaction = supportFragmentManager.beginTransaction()
         hideFragments(transaction)
+//        var outRect = Rect()
+//        tab_layout.getDrawingRect(outRect)
+//        Logger.d("高度--- %d", fl_container.height)
+//        Logger.d("tab layout --- %s", outRect)
         when (position) {
-            0 // 首页
+            0 //动漫
+            -> mAniFragment?.let {
+                transaction.show(it)
+            } ?: AniFragment.getInstance(mTitles[position]).let {
+                mAniFragment = it
+                transaction.add(R.id.fl_container, it, "animation") }
+            1 //我的
+            -> mMineFragment?.let {
+                transaction.show(it)
+            } ?: MineFragment.getInstance(mTitles[position]).let {
+                mMineFragment = it
+                transaction.add(R.id.fl_container, it, "mine") }
+            2 // 首页
             -> mHomeFragment?.let {
                 transaction.show(it)
             } ?: HomeFragment.getInstance(mTitles[position]).let {
                 mHomeFragment = it
                 transaction.add(R.id.fl_container, it, "home")
             }
-            1  //发现
+            3  //发现
             -> mDiscoveryFragment?.let {
                 transaction.show(it)
             } ?: DiscoveryFragment.getInstance(mTitles[position]).let {
                 mDiscoveryFragment = it
                 transaction.add(R.id.fl_container, it, "discovery") }
-            2  //热门
+            4  //热门
             -> mHotFragment?.let {
                 transaction.show(it)
             } ?: HotFragment.getInstance(mTitles[position]).let {
                 mHotFragment = it
                 transaction.add(R.id.fl_container, it, "hot") }
-            3 //我的
-            -> mMineFragment?.let {
-                transaction.show(it)
-            } ?: MineFragment.getInstance(mTitles[position]).let {
-                mMineFragment = it
-                transaction.add(R.id.fl_container, it, "mine") }
-            4 //动漫
-            -> mAniFragment?.let {
-                transaction.show(it)
-            } ?: AniFragment.getInstance(mTitles[position]).let {
-                mAniFragment = it
-                transaction.add(R.id.fl_container, it, "animation") }
 
             else -> {
 
             }
         }
-
+//        tab_layout.getDrawingRect(outRect)
+//        Logger.d("高度-  === -- %d", fl_container.height)
+//        Logger.d("tab layout rect--- %s", outRect)
         mIndex = position
         tab_layout.currentTab = mIndex
         transaction.commitAllowingStateLoss()
@@ -134,11 +144,11 @@ class MainActivity : BaseActivity() {
      * @param transaction transaction
      */
     private fun hideFragments(transaction: FragmentTransaction) {
+        mAniFragment?.let { transaction.hide(it) }
+        mMineFragment?.let { transaction.hide(it) }
         mHomeFragment?.let { transaction.hide(it) }
         mDiscoveryFragment?.let { transaction.hide(it) }
         mHotFragment?.let { transaction.hide(it) }
-        mMineFragment?.let { transaction.hide(it) }
-        mAniFragment?.let { transaction.hide(it) }
     }
 
 

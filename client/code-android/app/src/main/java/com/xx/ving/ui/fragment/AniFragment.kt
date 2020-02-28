@@ -14,7 +14,9 @@ import com.xx.ving.net.exception.ErrorStatus
 import com.xx.ving.showToast
 import com.xx.ving.ui.adapter.AniAdapter
 import com.xx.ving.utils.DisplayManager
+import com.xx.ving.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_ani.*
+import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
  * Created by xx on 2020/02/21.
@@ -49,7 +51,8 @@ class AniFragment: BaseFragment(), AniContract.View{
     override fun initView() {
         mPresenter.attachView(this)
 
-        mLayoutStatusView = multipleStatusView
+        //解决切换Fragment导致tab上下位置不对问题
+        activity?.let { StatusBarUtil.darkMode(it) }
 
         mRecyclerView.adapter = mAdapter
         mRecyclerView.layoutManager = GridLayoutManager(activity, 2)
@@ -76,6 +79,9 @@ class AniFragment: BaseFragment(), AniContract.View{
                 }
             }
         })
+
+        mLayoutStatusView = multipleStatusView
+
     }
 
     override fun lazyLoad() {
@@ -84,6 +90,7 @@ class AniFragment: BaseFragment(), AniContract.View{
 
     override fun setAniData(aniList: ArrayList<AniBean.AItem>) {
 //        Logger.d("setAniData    ----- ")
+        mLayoutStatusView?.showContent()
         mAniList = aniList
         mAdapter?.setData(mAniList)
     }
@@ -96,18 +103,18 @@ class AniFragment: BaseFragment(), AniContract.View{
     override fun showError(errorMsg: String, errorCode: Int) {
         showToast(errorMsg)
         if (errorCode == ErrorStatus.NETWORK_ERROR) {
-            multipleStatusView?.showNoNetwork()
+            mLayoutStatusView?.showNoNetwork()
         } else {
-            multipleStatusView?.showError()
+            mLayoutStatusView?.showError()
         }
     }
 
     override fun showLoading() {
-        multipleStatusView?.showLoading()
+        mLayoutStatusView?.showLoading()
     }
 
     override fun dismissLoading() {
-        multipleStatusView?.showContent()
+        mLayoutStatusView?.showContent()
     }
 
     override fun onDestroy() {
