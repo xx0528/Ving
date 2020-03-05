@@ -253,7 +253,7 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
         Logger.d("playUrl:$url")
         mAniVideoView.setUp(url, false, "")
         //开始自动播放
-//        mAniVideoView.startPlayLogic()
+        mAniVideoView.startPlayLogic()
     }
 
     override fun setAniInfo(itemInfo: AniBean.AItem) {

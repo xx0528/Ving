@@ -178,3 +178,8 @@ $ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf 也可复制任意�
 ###docker compose
 编写 docker-compose.yml文件
  docker-compose up 运行docker-compose
+
+
+###docker compose 和 DockerFile 的作用
+docker-compose 是为了运行多个系统 需要多个镜像同时协同工作时使用 创建几个镜像
+DockerFile 是创建一个复杂镜像 包括镜像创建后执行的命令

@@ -222,7 +222,9 @@ func (a *CommonAPI) GetAniList(aType string, num int, category string, aniID int
 		data["category"] = "动画分类"
 		data["likeCount"] = rand.Intn(100000)
 		data["score"] = float32(3+rand.Intn(7)) + (float32(rand.Intn(10)) / 10)
-		data["playUrl"] = "http://ali.cdn.kaiyanapp.com/1582517488402_72e64987.mp4?auth_key=1582823404-0-0-73bf6c2341ca8fb63abd52377763062f"
+		// data["playUrl"] = "http://ali.cdn.kaiyanapp.com/1582687191736_7a642380_1280x720.mp4?auth_key=1582881284-0-0-fe8a2d1121cb9ee797af8d67f3622a0a"
+		// data["playUrl"] = "http://meigui.qqqq-kuyun.com/20190420/2629_3ee00295/index.m3u8"
+		data["playUrl"] = "http://meng.wuyou-zuida.com/share/25a714b921e3a2ba54c452debb9b5584"
 		data["duration"] = 50 + rand.Intn(200)
 		data["createTime"] = time.Now().Unix() - int64(rand.Intn(1000))
 		data["tags"] = tagList
