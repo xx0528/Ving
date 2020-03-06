@@ -1,8 +1,8 @@
 package controller
 
 import (
+	"os"
 	"server/api"
-	"server/database"
 	"server/model"
 	"server/util"
 
@@ -13,16 +13,17 @@ import (
 	"strings"
 
 	// "github.com/88250/gulu"
+	"github.com/88250/gulu"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
 // Logger
-// var logger = gulu.Log.NewLogger(os.Stdout)
+var logger = gulu.Log.NewLogger(os.Stdout)
 
 // MapRoutes returns a gin engine and binds controllers with request URLs.
-func MapRoutes(db *database.MovieDatabase) *gin.Engine {
+func MapRoutes() *gin.Engine {
 	ret := gin.New()
 	ret.SetFuncMap(template.FuncMap{
 		// "dict": func(values ...interface{}) (map[string]interface{}, error) {
@@ -57,9 +58,9 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 	})
 	// ret.Use(sessions.Sessions("movie", store))
 
-	commonHandler := api.CommonAPI{DB: db}
-	userHandler := api.UserAPI{DB: db}
-	postHandler := api.PostAPI{DB: db}
+	commonHandler := api.CommonAPI{}
+	userHandler := api.UserAPI{}
+	postHandler := api.PostAPI{}
 
 	postC := ret.Group(util.PathAPI)
 	{
@@ -109,4 +110,29 @@ func MapRoutes(db *database.MovieDatabase) *gin.Engine {
 	})
 
 	return ret
+}
+
+func routePath(c *gin.Context) {
+	path := c.Param("path")
+	switch path {
+	case util.PathAPI:
+		return
+	}
+
+	logger.Tracef("can't handle path [" + path + "]")
+	notFound(c)
+}
+
+func cors() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Credentials", "true")
+		c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Header("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+		c.Next()
+	}
 }

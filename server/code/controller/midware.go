@@ -1,14 +1,8 @@
 package controller
 
 import (
-	"os"
-
-	"github.com/88250/gulu"
 	"github.com/gin-gonic/gin"
 )
-
-// Logger
-var logger = gulu.Log.NewLogger(os.Stdout)
 
 // DataModel represents data model.
 type DataModel map[string]interface{}

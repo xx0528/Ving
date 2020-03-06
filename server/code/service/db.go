@@ -1,45 +1,72 @@
 package service
 
-// import (
-// 	"context"
-// 	"os"
-// 	"time"
+import (
+	"database/sql"
+	"os"
+	"time"
 
-// 	"github.com/88250/gulu"
-// 	"go.mongodb.org/mongo-driver/mongo"
-// 	"go.mongodb.org/mongo-driver/mongo/options"
-// 	"go.mongodb.org/mongo-driver/mongo/readpref"
-// )
+	"server/model"
 
-// // Logger
-// var logger = gulu.Log.NewLogger(os.Stdout)
+	"github.com/88250/gulu"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
+)
 
-// // ConnectDB creates a new wrapper for the mongo-go-driver.
-// func ConnectDB(connection, dbname string) (*MovieDatabase, error) {
-// 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-// 	defer cancel()
-// 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(connection))
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	ctxping, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-// 	defer cancel()
-// 	err = client.Ping(ctxping, readpref.Primary())
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	db := client.Database(dbname)
-// 	return &MovieDatabase{DB: db, Client: client, Context: ctx}, nil
-// }
+// Logger
+var logger = gulu.Log.NewLogger(os.Stdout)
 
-// // MovieDatabase is a wrapper for the mongo-go-driver.
-// type MovieDatabase struct {
-// 	DB      *mongo.Database
-// 	Client  *mongo.Client
-// 	Context context.Context
-// }
+var db *gorm.DB
+var useSQLite bool
 
-// // Close closes the mongo-go-driver connection.
-// func (d *MovieDatabase) Close() {
-// 	d.Client.Disconnect(d.Context)
-// }
+// ConnectDB connects to the database.
+func ConnectDB() {
+	var err error
+	useSQLite = false
+	if "" != model.Conf.SQLite {
+		db, err = gorm.Open("sqlite3", model.Conf.SQLite)
+		useSQLite = true
+	} else if "" != model.Conf.MySQL {
+		db, err = gorm.Open("mysql", model.Conf.MySQL)
+	} else {
+		logger.Fatal("please specify database")
+	}
+	if nil != err {
+		logger.Fatalf("opens database failed: " + err.Error())
+	}
+	if useSQLite {
+		logger.Debug("used [SQLite] as underlying database")
+	} else {
+		logger.Debug("used [MySQL] as underlying database")
+	}
+
+	if err = db.AutoMigrate(model.Models...).Error; nil != err {
+		logger.Fatal("auto migrate tables failed: " + err.Error())
+	}
+
+	db.DB().SetMaxIdleConns(10)
+	db.DB().SetMaxOpenConns(50)
+	db.DB().SetConnMaxLifetime(30 * time.Second)
+	db.LogMode(model.Conf.ShowSQL)
+}
+
+// DisconnectDB disconnects from the database.
+func DisconnectDB() {
+	if err := db.Close(); nil != err {
+		logger.Errorf("Disconnect from database failed: " + err.Error())
+	}
+}
+
+// DBStat returns database statistics.
+func DBStat() sql.DBStats {
+	return db.DB().Stats()
+}
+
+// Database returns the underlying database name.
+func Database() string {
+	if useSQLite {
+		return "SQLite"
+	}
+
+	return "MySQL"
+}

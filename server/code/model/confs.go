@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/88250/gulu"
+	"github.com/jinzhu/gorm"
 )
 
 // Logger
@@ -32,6 +33,8 @@ var Models = []interface{}{
 	// &Category{}, &Archive{}, &Setting{}, &Correlation{},
 }
 
+const tablePrefix = "ving_"
+
 // ZeroPushTime represents zero push time.
 var ZeroPushTime, _ = time.Parse("2006-01-02 15:04:05", "2006-01-02 15:04:05")
 
@@ -45,8 +48,8 @@ type Configuration struct {
 	SessionSecret         string // HTTP session secret
 	SessionMaxAge         int    // HTTP session max age (in second)
 	RuntimeMode           string // runtime mode (dev/prod)
-	MongoConnect          string // MongoDB connection URL
-	MongoDBName           string // MongoDB DBName
+	SQLite                string // SQLite database file path
+	MySQL                 string // MySQL connection URL
 	AxiosBaseURL          string // axio base URL
 	MockServer            string // mock server
 	Port                  string // listen port
@@ -55,7 +58,7 @@ type Configuration struct {
 // LoadConf loads the configurations. Command-line arguments will override configuration file.
 func LoadConf() {
 	showCfg := flag.Bool("show_cfg", true, "prints current cfg")
-	confPath := flag.String("conf", "movie.json", "path of movie.json")
+	confPath := flag.String("conf", "ving.json", "path of ving.json")
 	confServer := flag.String("server", "", "this will override Conf.Server if specified")
 	confStaticServer := flag.String("static_server", "", "this will override Conf.StaticServer if specified")
 	confStaticResourceVer := flag.String("static_resource_ver", "", "this will override Conf.StaticResourceVersion if specified")
@@ -63,8 +66,8 @@ func LoadConf() {
 	confSessionSecret := flag.String("session_secret", "", "this will override Conf.SessionSecret")
 	confSessionMaxAge := flag.Int("session_max_age", 0, "this will override Conf.SessionMaxAge")
 	confRuntimeMode := flag.String("runtime_mode", "", "this will override Conf.RuntimeMode if specified")
-	confMongoConnect := flag.String("mongo_connect", "", "this will override Conf.MongoConnect if specified")
-	confMongoDBName := flag.String("mongo_dbname", "", "this will override Conf.MongoDBName if specified")
+	confSQLite := flag.String("sqlite", "", "this will override Conf.SQLite if specified")
+	confMySQL := flag.String("mysql", "", "this will override Conf.MySQL if specified")
 	confPort := flag.String("port", "", "this will override Conf.Port if specified")
 
 	flag.Parse()
@@ -76,7 +79,7 @@ func LoadConf() {
 
 	Conf = &Configuration{}
 	if err = json.Unmarshal(bytes, Conf); nil != err {
-		logger.Fatal("parses [movie.json] failed: ", err)
+		logger.Fatal("parses [ving.json] failed: ", err)
 	}
 
 	gulu.Log.SetLevel(Conf.LogLevel)
@@ -125,16 +128,21 @@ func LoadConf() {
 		Conf.StaticResourceVersion = *confStaticResourceVer
 	}
 
-	if "" != *confMongoConnect {
-		Conf.MongoConnect = *confMongoConnect
+	Conf.SQLite = strings.Replace(Conf.SQLite, "${home}", home, 1)
+	if "" != *confSQLite {
+		Conf.SQLite = *confSQLite
 	}
-
-	if "" != *confMongoDBName {
-		Conf.MongoDBName = *confMongoDBName
+	if "" != *confMySQL {
+		Conf.MySQL = *confMySQL
+		Conf.SQLite = ""
 	}
 
 	if "" != *confPort {
 		Conf.Port = *confPort
+	}
+
+	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
+		return tablePrefix + defaultTableName
 	}
 
 	if *showCfg {
@@ -147,8 +155,7 @@ func LoadConf() {
 		fmt.Println("端口号                  :   ", Conf.Port)
 		fmt.Println("StaticServer           :   ", Conf.StaticServer)
 		fmt.Println("StaticResourceVersion  :   ", Conf.StaticResourceVersion)
-		fmt.Println("数据库连接               :   ", Conf.MongoConnect)
-		fmt.Println("数据库名字               :   ", Conf.MongoDBName)
+		fmt.Println("数据库连接               :   ", Conf.MySQL)
 	}
 
 	logger.Debugf("configurations [%#v]", Conf)
