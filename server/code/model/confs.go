@@ -29,8 +29,12 @@ var UserAgent = "Pipe/" + Version + "; +https://github.com/b3log/pipe"
 
 // Models represents all models..
 var Models = []interface{}{
-	// &User{}, &Article{}, &Comment{}, &Navigation{}, &Tag{},
-	// &Category{}, &Archive{}, &Setting{}, &Correlation{},
+	&MacCjNode{}, &MacGbook{}, &MacGroup{}, &MacOrder{}, &MacTmpwebsite{},
+	&MacVod{}, &MacAdmin{}, &MacCash{}, &MacCollect{}, &MacComment{},
+	&MacRole{}, &MacTmpvod{}, &MacTopic{}, &MacUlog{}, &MacUser{},
+	&MacActor{}, &MacArt{}, &MacCard{}, &MacCjContent{}, &MacType{},
+	&MacWebsite{}, &MacCjHistory{}, &MacLink{}, &MacMsg{}, &MacPlog{},
+	&MacVisit{},
 }
 
 const tablePrefix = "ving_"

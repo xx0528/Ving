@@ -8,7 +8,7 @@
     "SessionSecret": "",
     "SessionMaxAge": 86400,
     "SQLite": "",
-    "MySQL": "root:@(localhost:3306)/pipe?charset=utf8mb4&parseTime=True&loc=Local&timeout=1s&readTimeout=16s&writeTimeout=16s",
+    "MySQL": "root:dzq1234@(localhost:3306)/ving?charset=utf8mb4&parseTime=True&loc=Local&timeout=1s&readTimeout=16s&writeTimeout=16s",
     "AxiosBaseURL": "/api",
     "StaticRoot": "",
     "MockServer": "http://localhost:8888"
