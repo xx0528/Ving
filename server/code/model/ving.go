@@ -37,7 +37,7 @@ type MacCjNode struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacCjNode) TableName() string {
-	return "mac_cj_node"
+	return "ving_cj_node"
 }
 
 // MacGbook [...]
@@ -56,7 +56,7 @@ type MacGbook struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacGbook) TableName() string {
-	return "mac_gbook"
+	return "ving_gbook"
 }
 
 // MacGroup [...]
@@ -75,7 +75,7 @@ type MacGroup struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacGroup) TableName() string {
-	return "mac_group"
+	return "ving_group"
 }
 
 // MacOrder [...]
@@ -94,7 +94,7 @@ type MacOrder struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacOrder) TableName() string {
-	return "mac_order"
+	return "ving_order"
 }
 
 // MacTmpwebsite [...]
@@ -105,7 +105,7 @@ type MacTmpwebsite struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacTmpwebsite) TableName() string {
-	return "mac_tmpwebsite"
+	return "ving_tmpwebsite"
 }
 
 // MacVod [...]
@@ -195,7 +195,7 @@ type MacVod struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacVod) TableName() string {
-	return "mac_vod"
+	return "ving_vod"
 }
 
 // MacAdmin [...]
@@ -215,7 +215,7 @@ type MacAdmin struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacAdmin) TableName() string {
-	return "mac_admin"
+	return "ving_admin"
 }
 
 // MacCash [...]
@@ -234,7 +234,7 @@ type MacCash struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacCash) TableName() string {
-	return "mac_cash"
+	return "ving_cash"
 }
 
 // MacCollect [...]
@@ -254,7 +254,7 @@ type MacCollect struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacCollect) TableName() string {
-	return "mac_collect"
+	return "ving_collect"
 }
 
 // MacComment [...]
@@ -277,7 +277,7 @@ type MacComment struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacComment) TableName() string {
-	return "mac_comment"
+	return "ving_comment"
 }
 
 // MacRole [...]
@@ -315,7 +315,7 @@ type MacRole struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacRole) TableName() string {
-	return "mac_role"
+	return "ving_role"
 }
 
 // MacTmpvod [...]
@@ -326,7 +326,7 @@ type MacTmpvod struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacTmpvod) TableName() string {
-	return "mac_tmpvod"
+	return "ving_tmpvod"
 }
 
 // MacTopic [...]
@@ -372,7 +372,7 @@ type MacTopic struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacTopic) TableName() string {
-	return "mac_topic"
+	return "ving_topic"
 }
 
 // MacUlog [...]
@@ -390,7 +390,7 @@ type MacUlog struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacUlog) TableName() string {
-	return "mac_ulog"
+	return "ving_ulog"
 }
 
 // MacUser [...]
@@ -429,7 +429,7 @@ type MacUser struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacUser) TableName() string {
-	return "mac_user"
+	return "ving_user"
 }
 
 // MacActor [...]
@@ -480,7 +480,7 @@ type MacActor struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacActor) TableName() string {
-	return "mac_actor"
+	return "ving_actor"
 }
 
 // MacArt [...]
@@ -534,7 +534,7 @@ type MacArt struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacArt) TableName() string {
-	return "mac_art"
+	return "ving_art"
 }
 
 // MacCard [...]
@@ -553,7 +553,7 @@ type MacCard struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacCard) TableName() string {
-	return "mac_card"
+	return "ving_card"
 }
 
 // MacCjContent [...]
@@ -568,7 +568,7 @@ type MacCjContent struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacCjContent) TableName() string {
-	return "mac_cj_content"
+	return "ving_cj_content"
 }
 
 // MacType [...]
@@ -597,7 +597,7 @@ type MacType struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacType) TableName() string {
-	return "mac_type"
+	return "ving_type"
 }
 
 // MacWebsite [...]
@@ -646,7 +646,7 @@ type MacWebsite struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacWebsite) TableName() string {
-	return "mac_website"
+	return "ving_website"
 }
 
 // MacCjHistory [...]
@@ -656,7 +656,7 @@ type MacCjHistory struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacCjHistory) TableName() string {
-	return "mac_cj_history"
+	return "ving_cj_history"
 }
 
 // MacLink [...]
@@ -673,7 +673,7 @@ type MacLink struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacLink) TableName() string {
-	return "mac_link"
+	return "ving_link"
 }
 
 // MacMsg [...]
@@ -690,7 +690,7 @@ type MacMsg struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacMsg) TableName() string {
-	return "mac_msg"
+	return "ving_msg"
 }
 
 // MacPlog [...]
@@ -706,7 +706,7 @@ type MacPlog struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacPlog) TableName() string {
-	return "mac_plog"
+	return "ving_plog"
 }
 
 // MacVisit [...]
@@ -720,5 +720,5 @@ type MacVisit struct {
 
 // TableName get sql table name.获取数据库表名
 func (m *MacVisit) TableName() string {
-	return "mac_visit"
+	return "ving_visit"
 }
