@@ -7,7 +7,7 @@ import (
 	"server/util"
 
 	// "errors"
-	"html/template"
+	// "html/template"
 	// "net/http"
 	// "strconv"
 	"strings"
@@ -25,25 +25,25 @@ var logger = gulu.Log.NewLogger(os.Stdout)
 // MapRoutes returns a gin engine and binds controllers with request URLs.
 func MapRoutes() *gin.Engine {
 	ret := gin.New()
-	ret.SetFuncMap(template.FuncMap{
-		// "dict": func(values ...interface{}) (map[string]interface{}, error) {
-		// 	if len(values)%2 != 0 {
-		// 		return nil, errors.New("len(values) is " + strconv.Itoa(len(values)%2))
-		// 	}
-		// 	dict := make(map[string]interface{}, len(values)/2)
-		// 	for i := 0; i < len(values); i += 2 {
-		// 		key, ok := values[i].(string)
-		// 		if !ok {
-		// 			return nil, errors.New("")
-		// 		}
-		// 		dict[key] = values[i+1]
-		// 	}
-		// 	return dict, nil
-		// },
-		"minus":    func(a, b int) int { return a - b },
-		"mod":      func(a, b int) int { return a % b },
-		"noescape": func(s string) template.HTML { return template.HTML(s) },
-	})
+	// ret.SetFuncMap(template.FuncMap{
+	// "dict": func(values ...interface{}) (map[string]interface{}, error) {
+	// 	if len(values)%2 != 0 {
+	// 		return nil, errors.New("len(values) is " + strconv.Itoa(len(values)%2))
+	// 	}
+	// 	dict := make(map[string]interface{}, len(values)/2)
+	// 	for i := 0; i < len(values); i += 2 {
+	// 		key, ok := values[i].(string)
+	// 		if !ok {
+	// 			return nil, errors.New("")
+	// 		}
+	// 		dict[key] = values[i+1]
+	// 	}
+	// 	return dict, nil
+	// },
+	// "minus":    func(a, b int) int { return a - b },
+	// "mod":      func(a, b int) int { return a % b },
+	// "noescape": func(s string) template.HTML { return template.HTML(s) },
+	// })
 
 	if "dev" == model.Conf.RuntimeMode {
 		ret.Use(gin.Logger())
@@ -56,7 +56,11 @@ func MapRoutes() *gin.Engine {
 		Secure:   strings.HasPrefix(model.Conf.Server, "https"),
 		HttpOnly: true,
 	})
-	// ret.Use(sessions.Sessions("movie", store))
+	ret.Use(sessions.Sessions("ving", store))
+
+	vodGroup := ret.Group("/vod")
+	vodGroup.GET("/ani", GetAnimation)
+	vodGroup.GET("/animore", GetMoreAnimation)
 
 	commonHandler := api.CommonAPI{}
 	userHandler := api.UserAPI{}

@@ -144,9 +144,9 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
          * 设置嵌套水平的 RecyclerView
          */
         val num = data.data?.aniNum ?: 10
-        var selections = ArrayList<Int>()
+        var selections = ArrayList<String>()
         for (index in 1..num){
-            selections.add(index)
+            selections.add("第" + index.toString() + "集")
         }
 
         val adapter = AniDetailSelectionAdapter(mContext, selections, R.layout.item_ani_selection)

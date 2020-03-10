@@ -19,14 +19,14 @@ import com.orhanobut.logger.Logger
  * Created by xx on 2020/2/27 15:02.
  * desc: AniDetailSelectionAdapter 选集的adapter
  */
-class AniDetailSelectionAdapter (mContext: Context, selectionList: ArrayList<Int>, layoutId: Int) :
-        CommonAdapter<Int>(mContext, selectionList, layoutId) {
+class AniDetailSelectionAdapter (mContext: Context, selectionList: ArrayList<String>, layoutId: Int) :
+        CommonAdapter<String>(mContext, selectionList, layoutId) {
 
     private var mAniData: AniBean.AItem? = null
 
-    override fun bindData(holder: ViewHolder, data: Int, position: Int) {
+    override fun bindData(holder: ViewHolder, data: String, position: Int) {
 
-        holder.setText(R.id.tv_select_id, data.toString())
+        holder.setText(R.id.tv_select_id, data)
 
         with(holder) {
             setOnItemClickListener(listener = View.OnClickListener {

@@ -12,10 +12,10 @@
 
     <TextView
         android:id="@+id/tv_select_id"
-        android:layout_width="35dp"
+        android:layout_width="100dp"
         android:layout_height="35dp"
         android:textSize="15sp"
-        android:text="100"
+        android:text="第100集"
         android:gravity="center"
         android:background="@drawable/shape_corner_bg"
         android:textColor="@color/color_black"

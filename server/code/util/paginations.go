@@ -1,5 +1,3 @@
-
-
 package util
 
 import (
@@ -31,6 +29,11 @@ func GetPage(c *gin.Context) int {
 		ret = 1
 	}
 
+	return ret
+}
+
+func GetIntParam(c *gin.Context, p string) int {
+	ret, _ := strconv.Atoi(c.Query(p))
 	return ret
 }
 

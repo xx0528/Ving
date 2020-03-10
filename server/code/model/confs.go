@@ -29,12 +29,12 @@ var UserAgent = "Pipe/" + Version + "; +https://github.com/b3log/pipe"
 
 // Models represents all models..
 var Models = []interface{}{
-	&MacCjNode{}, &MacGbook{}, &MacGroup{}, &MacOrder{}, &MacTmpwebsite{},
-	&MacVod{}, &MacAdmin{}, &MacCash{}, &MacCollect{}, &MacComment{},
-	&MacRole{}, &MacTmpvod{}, &MacTopic{}, &MacUlog{}, &MacUser{},
-	&MacActor{}, &MacArt{}, &MacCard{}, &MacCjContent{}, &MacType{},
-	&MacWebsite{}, &MacCjHistory{}, &MacLink{}, &MacMsg{}, &MacPlog{},
-	&MacVisit{},
+	&VingCjNode{}, &VingGbook{}, &VingGroup{}, &VingOrder{}, &VingTmpwebsite{},
+	&VingVod{}, &VingAdmin{}, &VingCash{}, &VingCollect{}, &VingComment{},
+	&VingRole{}, &VingTmpvod{}, &VingTopic{}, &VingUlog{}, &VingUser{},
+	&VingActor{}, &VingArt{}, &VingCard{}, &VingCjContent{}, &VingType{},
+	&VingWebsite{}, &VingCjHistory{}, &VingLink{}, &VingMsg{}, &VingPlog{},
+	&VingVisit{},
 }
 
 const tablePrefix = "ving_"
@@ -146,7 +146,7 @@ func LoadConf() {
 	}
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		return tablePrefix + defaultTableName
+		return defaultTableName
 	}
 
 	if *showCfg {

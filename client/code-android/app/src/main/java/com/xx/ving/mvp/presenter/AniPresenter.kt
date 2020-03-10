@@ -11,7 +11,7 @@ import com.xx.ving.net.exception.ExceptionHandle
  */
 class AniPresenter : BasePresenter<AniContract.View>(), AniContract.Presenter {
 
-    var pageIdx = 0
+    var pageIdx = 1
 
     private val aniModel: AniModel by lazy {
         AniModel()

@@ -1,7 +1,7 @@
 package model
 
 // MacCjNode [...]
-type MacCjNode struct {
+type VingCjNode struct {
 	Nodeid           int16  `gorm:"primary_key;AUTO_INCREMENT;column:nodeid;type:smallint(6) unsigned;not null" json:"nodeid"` //
 	Name             string `gorm:"column:name;type:varchar(20);not null" json:"name"`                                         //
 	Lastdate         int    `gorm:"column:lastdate;type:int(10) unsigned;not null" json:"lastdate"`                            //
@@ -36,12 +36,12 @@ type MacCjNode struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacCjNode) TableName() string {
+func (m *VingCjNode) TableName() string {
 	return "ving_cj_node"
 }
 
 // MacGbook [...]
-type MacGbook struct {
+type VingGbook struct {
 	GbookID        int    `gorm:"primary_key;AUTO_INCREMENT;column:gbook_id;type:int(10) unsigned;not null" json:"gbook_id"`             //编号
 	GbookRid       int    `gorm:"index:gbook_rid;column:gbook_rid;type:int(10) unsigned;not null" json:"gbook_rid"`                      //
 	UserID         int    `gorm:"index:user_id;column:user_id;type:int(10) unsigned;not null" json:"user_id"`                            //
@@ -55,12 +55,12 @@ type MacGbook struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacGbook) TableName() string {
+func (m *VingGbook) TableName() string {
 	return "ving_gbook"
 }
 
 // MacGroup [...]
-type MacGroup struct {
+type VingGroup struct {
 	GroupID          int16  `gorm:"primary_key;AUTO_INCREMENT;column:group_id;type:smallint(6);not null" json:"group_id"`         //
 	GroupName        string `gorm:"column:group_name;type:varchar(30);not null" json:"group_name"`                                //
 	GroupStatus      int8   `gorm:"index:group_status;column:group_status;type:tinyint(1) unsigned;not null" json:"group_status"` //
@@ -74,12 +74,12 @@ type MacGroup struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacGroup) TableName() string {
+func (m *VingGroup) TableName() string {
 	return "ving_group"
 }
 
 // MacOrder [...]
-type MacOrder struct {
+type VingOrder struct {
 	OrderID      int     `gorm:"primary_key;AUTO_INCREMENT;column:order_id;type:int(10) unsigned;not null" json:"order_id"` //
 	UserID       int     `gorm:"index:user_id;column:user_id;type:int(10) unsigned;not null" json:"user_id"`                //
 	OrderStatus  int8    `gorm:"column:order_status;type:tinyint(1) unsigned;not null" json:"order_status"`                 //
@@ -93,23 +93,23 @@ type MacOrder struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacOrder) TableName() string {
+func (m *VingOrder) TableName() string {
 	return "ving_order"
 }
 
 // MacTmpwebsite [...]
-type MacTmpwebsite struct {
+type VingTmpwebsite struct {
 	ID1   int    `gorm:"column:id1;type:int(10) unsigned" json:"id1"`         //
 	Name1 string `gorm:"column:name1;type:varchar(60);not null" json:"name1"` //
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacTmpwebsite) TableName() string {
+func (m *VingTmpwebsite) TableName() string {
 	return "ving_tmpwebsite"
 }
 
 // MacVod [...]
-type MacVod struct {
+type VingVod struct {
 	VodID          int     `gorm:"primary_key;AUTO_INCREMENT;column:vod_id;type:int(10) unsigned;not null" json:"vod_id"`                  //视频id
 	TypeID         int16   `gorm:"index:type_id;column:type_id;type:smallint(6);not null" json:"type_id"`                                  //分类id
 	TypeID1        int16   `gorm:"index:type_id_1;column:type_id_1;type:smallint(6) unsigned;not null" json:"type_id_1"`                   //一级分类id
@@ -194,12 +194,12 @@ type MacVod struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacVod) TableName() string {
+func (m *VingVod) TableName() string {
 	return "ving_vod"
 }
 
 // MacAdmin [...]
-type MacAdmin struct {
+type VingAdmin struct {
 	AdminID            int16  `gorm:"primary_key;AUTO_INCREMENT;column:admin_id;type:smallint(6) unsigned;not null" json:"admin_id"` //
 	AdminName          string `gorm:"index:admin_name;column:admin_name;type:varchar(30);not null" json:"admin_name"`                //
 	AdminPwd           string `gorm:"column:admin_pwd;type:char(32);not null" json:"admin_pwd"`                                      //
@@ -214,12 +214,12 @@ type MacAdmin struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacAdmin) TableName() string {
+func (m *VingAdmin) TableName() string {
 	return "ving_admin"
 }
 
 // MacCash [...]
-type MacCash struct {
+type VingCash struct {
 	CashID        int     `gorm:"primary_key;AUTO_INCREMENT;column:cash_id;type:int(10) unsigned;not null" json:"cash_id"`   //
 	UserID        int     `gorm:"index:user_id;column:user_id;type:int(10) unsigned;not null" json:"user_id"`                //
 	CashStatus    int8    `gorm:"index:cash_status;column:cash_status;type:tinyint(1) unsigned;not null" json:"cash_status"` //状态
@@ -233,12 +233,12 @@ type MacCash struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacCash) TableName() string {
+func (m *VingCash) TableName() string {
 	return "ving_cash"
 }
 
 // MacCollect [...]
-type MacCollect struct {
+type VingCollect struct {
 	CollectID         int    `gorm:"primary_key;AUTO_INCREMENT;column:collect_id;type:int(10) unsigned;not null" json:"collect_id"` //
 	CollectName       string `gorm:"column:collect_name;type:varchar(30);not null" json:"collect_name"`                             //
 	CollectURL        string `gorm:"column:collect_url;type:varchar(255);not null" json:"collect_url"`                              //
@@ -253,12 +253,12 @@ type MacCollect struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacCollect) TableName() string {
+func (m *VingCollect) TableName() string {
 	return "ving_collect"
 }
 
 // MacComment [...]
-type MacComment struct {
+type VingComment struct {
 	CommentID      int    `gorm:"primary_key;AUTO_INCREMENT;column:comment_id;type:int(10) unsigned;not null" json:"comment_id"`     //编号
 	CommentMid     int8   `gorm:"index:comment_mid;column:comment_mid;type:tinyint(1) unsigned;not null" json:"comment_mid"`         //模块id，1视频2文字3专题
 	CommentRid     int    `gorm:"index:comment_rid;column:comment_rid;type:int(10) unsigned;not null" json:"comment_rid"`            //
@@ -276,12 +276,12 @@ type MacComment struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacComment) TableName() string {
+func (m *VingComment) TableName() string {
 	return "ving_comment"
 }
 
 // MacRole [...]
-type MacRole struct {
+type VingRole struct {
 	RoleID        int     `gorm:"primary_key;AUTO_INCREMENT;column:role_id;type:int(10) unsigned;not null" json:"role_id"`              //角色id
 	RoleRid       int     `gorm:"index:role_rid;column:role_rid;type:int(10) unsigned;not null" json:"role_rid"`                        //关联视频id
 	RoleName      string  `gorm:"index:role_name;column:role_name;type:varchar(255);not null" json:"role_name"`                         //角色名
@@ -314,23 +314,23 @@ type MacRole struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacRole) TableName() string {
+func (m *VingRole) TableName() string {
 	return "ving_role"
 }
 
 // MacTmpvod [...]
-type MacTmpvod struct {
+type VingTmpvod struct {
 	ID1   int    `gorm:"column:id1;type:int(10) unsigned" json:"id1"`          //
 	Name1 string `gorm:"column:name1;type:varchar(255);not null" json:"name1"` //
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacTmpvod) TableName() string {
+func (m *VingTmpvod) TableName() string {
 	return "ving_tmpvod"
 }
 
 // MacTopic [...]
-type MacTopic struct {
+type VingTopic struct {
 	TopicID        int16   `gorm:"primary_key;AUTO_INCREMENT;column:topic_id;type:smallint(6) unsigned;not null" json:"topic_id"`              //专题id
 	TopicName      string  `gorm:"index:topic_name;column:topic_name;type:varchar(255);not null" json:"topic_name"`                            //名称
 	TopicEn        string  `gorm:"index:topic_en;column:topic_en;type:varchar(255);not null" json:"topic_en"`                                  //别名
@@ -371,12 +371,12 @@ type MacTopic struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacTopic) TableName() string {
+func (m *VingTopic) TableName() string {
 	return "ving_topic"
 }
 
 // MacUlog [...]
-type MacUlog struct {
+type VingUlog struct {
 	UlogID     int   `gorm:"primary_key;AUTO_INCREMENT;column:ulog_id;type:int(10) unsigned;not null" json:"ulog_id"` //
 	UserID     int   `gorm:"index:user_id;column:user_id;type:int(10) unsigned;not null" json:"user_id"`              //
 	UlogMid    int8  `gorm:"index:ulog_mid;column:ulog_mid;type:tinyint(1) unsigned;not null" json:"ulog_mid"`        //
@@ -389,12 +389,12 @@ type MacUlog struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacUlog) TableName() string {
+func (m *VingUlog) TableName() string {
 	return "ving_ulog"
 }
 
 // MacUser [...]
-type MacUser struct {
+type VingUser struct {
 	UserID            int    `gorm:"primary_key;AUTO_INCREMENT;column:user_id;type:int(10) unsigned;not null" json:"user_id"`      //用户编号
 	GroupID           int16  `gorm:"index:group_id;column:group_id;type:smallint(6) unsigned;not null" json:"group_id"`            //用户组编号
 	UserName          string `gorm:"index:user_name;column:user_name;type:varchar(30);not null" json:"user_name"`                  //登录名
@@ -428,12 +428,12 @@ type MacUser struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacUser) TableName() string {
+func (m *VingUser) TableName() string {
 	return "ving_user"
 }
 
 // MacActor [...]
-type MacActor struct {
+type VingActor struct {
 	ActorID        int     `gorm:"primary_key;AUTO_INCREMENT;column:actor_id;type:int(10) unsigned;not null" json:"actor_id"`               //演员id
 	TypeID         int16   `gorm:"index:type_id;column:type_id;type:smallint(6) unsigned;not null" json:"type_id"`                          //分类id
 	TypeID1        int16   `gorm:"index:type_id_1;column:type_id_1;type:smallint(6) unsigned;not null" json:"type_id_1"`                    //一级分类id
@@ -479,12 +479,12 @@ type MacActor struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacActor) TableName() string {
+func (m *VingActor) TableName() string {
 	return "ving_actor"
 }
 
 // MacArt [...]
-type MacArt struct {
+type VingArt struct {
 	ArtID           int     `gorm:"primary_key;AUTO_INCREMENT;column:art_id;type:int(10) unsigned;not null" json:"art_id"`                //文章id
 	TypeID          int16   `gorm:"index:type_id;column:type_id;type:smallint(6) unsigned;not null" json:"type_id"`                       //分类id
 	TypeID1         int16   `gorm:"index:type_id_1;column:type_id_1;type:smallint(6) unsigned;not null" json:"type_id_1"`                 //一级分类id
@@ -533,12 +533,12 @@ type MacArt struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacArt) TableName() string {
+func (m *VingArt) TableName() string {
 	return "ving_art"
 }
 
 // MacCard [...]
-type MacCard struct {
+type VingCard struct {
 	CardID         int    `gorm:"primary_key;AUTO_INCREMENT;column:card_id;type:int(10) unsigned;not null" json:"card_id"`      //
 	CardNo         string `gorm:"index:card_no;column:card_no;type:varchar(16);not null" json:"card_no"`                        //
 	CardPwd        string `gorm:"index:card_pwd;column:card_pwd;type:varchar(8);not null" json:"card_pwd"`                      //
@@ -552,12 +552,12 @@ type MacCard struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacCard) TableName() string {
+func (m *VingCard) TableName() string {
 	return "ving_card"
 }
 
 // MacCjContent [...]
-type MacCjContent struct {
+type VingCjContent struct {
 	ID     int    `gorm:"primary_key;AUTO_INCREMENT;column:id;type:int(10) unsigned;not null" json:"-"` //
 	Nodeid int    `gorm:"index:nodeid;column:nodeid;type:int(10) unsigned;not null" json:"nodeid"`      //
 	Status int8   `gorm:"index:status;column:status;type:tinyint(1) unsigned;not null" json:"status"`   //
@@ -567,12 +567,12 @@ type MacCjContent struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacCjContent) TableName() string {
+func (m *VingCjContent) TableName() string {
 	return "ving_cj_content"
 }
 
 // MacType [...]
-type MacType struct {
+type VingType struct {
 	TypeID        int16  `gorm:"primary_key;AUTO_INCREMENT;column:type_id;type:smallint(6) unsigned;not null" json:"type_id"` //
 	TypeName      string `gorm:"index:type_name;column:type_name;type:varchar(60);not null" json:"type_name"`                 //
 	TypeEn        string `gorm:"index:type_en;column:type_en;type:varchar(60);not null" json:"type_en"`                       //
@@ -596,12 +596,12 @@ type MacType struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacType) TableName() string {
+func (m *VingType) TableName() string {
 	return "ving_type"
 }
 
 // MacWebsite [...]
-type MacWebsite struct {
+type VingWebsite struct {
 	WebsiteID           int     `gorm:"primary_key;AUTO_INCREMENT;column:website_id;type:int(10) unsigned;not null" json:"website_id"`                             //网址id
 	TypeID              int16   `gorm:"index:type_id;column:type_id;type:smallint(5) unsigned;not null" json:"type_id"`                                            //分类id
 	TypeID1             int16   `gorm:"index:type_id_1;column:type_id_1;type:smallint(5) unsigned;not null" json:"type_id_1"`                                      //一级分类id
@@ -645,22 +645,22 @@ type MacWebsite struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacWebsite) TableName() string {
+func (m *VingWebsite) TableName() string {
 	return "ving_website"
 }
 
 // MacCjHistory [...]
-type MacCjHistory struct {
+type VingCjHistory struct {
 	Md5 string `gorm:"primary_key;column:md5;type:char(32);not null" json:"md5"` //
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacCjHistory) TableName() string {
+func (m *VingCjHistory) TableName() string {
 	return "ving_cj_history"
 }
 
 // MacLink [...]
-type MacLink struct {
+type VingLink struct {
 	LinkID      int16  `gorm:"primary_key;AUTO_INCREMENT;column:link_id;type:smallint(6) unsigned;not null" json:"link_id"`  //编号
 	LinkType    int8   `gorm:"index:link_type;column:link_type;type:tinyint(1) unsigned;not null" json:"link_type"`          //类型0文字1图片
 	LinkName    string `gorm:"column:link_name;type:varchar(60);not null" json:"link_name"`                                  //名称
@@ -672,12 +672,12 @@ type MacLink struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacLink) TableName() string {
+func (m *VingLink) TableName() string {
 	return "ving_link"
 }
 
 // MacMsg [...]
-type MacMsg struct {
+type VingMsg struct {
 	MsgID      int    `gorm:"primary_key;AUTO_INCREMENT;column:msg_id;type:int(10) unsigned;not null" json:"msg_id"` //
 	UserID     int    `gorm:"index:user_id;column:user_id;type:int(10) unsigned;not null" json:"user_id"`            //
 	MsgType    int8   `gorm:"column:msg_type;type:tinyint(1) unsigned;not null" json:"msg_type"`                     //
@@ -689,12 +689,12 @@ type MacMsg struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacMsg) TableName() string {
+func (m *VingMsg) TableName() string {
 	return "ving_msg"
 }
 
 // MacPlog [...]
-type MacPlog struct {
+type VingPlog struct {
 	PlogID      int    `gorm:"primary_key;AUTO_INCREMENT;column:plog_id;type:int(10) unsigned;not null" json:"plog_id"` //
 	UserID      int    `gorm:"index:user_id;column:user_id;type:int(10) unsigned;not null" json:"user_id"`              //
 	UserID1     int    `gorm:"column:user_id_1;type:int(10);not null" json:"user_id_1"`                                 //
@@ -705,12 +705,12 @@ type MacPlog struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacPlog) TableName() string {
+func (m *VingPlog) TableName() string {
 	return "ving_plog"
 }
 
 // MacVisit [...]
-type MacVisit struct {
+type VingVisit struct {
 	VisitID   int    `gorm:"primary_key;AUTO_INCREMENT;column:visit_id;type:int(10) unsigned;not null" json:"visit_id"` //
 	UserID    int    `gorm:"index:user_id;column:user_id;type:int(10) unsigned" json:"user_id"`                         //
 	VisitIP   int    `gorm:"column:visit_ip;type:int(10) unsigned;not null" json:"visit_ip"`                            //
@@ -719,6 +719,6 @@ type MacVisit struct {
 }
 
 // TableName get sql table name.获取数据库表名
-func (m *MacVisit) TableName() string {
+func (m *VingVisit) TableName() string {
 	return "ving_visit"
 }

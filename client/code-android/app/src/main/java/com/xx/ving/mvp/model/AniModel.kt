@@ -18,8 +18,8 @@ class AniModel {
                 .compose(SchedulerUtils.ioToMain())
     }
 
-    fun loadMoreAniData(num:Int):Observable<AniBean> {
-        return RetrofitManager.service.getMoreAnimationData(num)
+    fun loadMoreAniData(p:Int):Observable<AniBean> {
+        return RetrofitManager.service.getMoreAnimationData(10, p)
                 .compose(SchedulerUtils.ioToMain())
     }
 

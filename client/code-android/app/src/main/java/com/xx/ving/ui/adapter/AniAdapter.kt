@@ -60,7 +60,16 @@ class AniAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>, layoutId:
 
         holder.getView<TextView>(R.id.tv_ani_name).text = data.data?.name ?: "默认名字"
         holder.getView<TextView>(R.id.tv_ani_desc).text = data.data?.desc ?: "默认描述"
-        holder.getView<TextView>(R.id.tv_ani_num).text = data.data?.aniNum.toString() + "集全"
+
+        var num = data.data?.aniNum
+        if (num == null || num == 0)
+        {
+            holder.getView<TextView>(R.id.tv_ani_num).text = ""
+        }
+        else
+        {
+            holder.getView<TextView>(R.id.tv_ani_num).text = num.toString() + "集全"
+        }
 
         holder.setOnItemClickListener(listener = View.OnClickListener {
             goToAnimationPlayer(mContext as Activity, holder.getView(R.id.iv_ani_img), data)
