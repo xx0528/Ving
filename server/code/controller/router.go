@@ -61,6 +61,7 @@ func MapRoutes() *gin.Engine {
 	vodGroup := ret.Group("/vod")
 	vodGroup.GET("/ani", GetAnimation)
 	vodGroup.GET("/animore", GetMoreAnimation)
+	vodGroup.GET("/anirelate", GetRelatedAnimation)
 
 	commonHandler := api.CommonAPI{}
 	userHandler := api.UserAPI{}

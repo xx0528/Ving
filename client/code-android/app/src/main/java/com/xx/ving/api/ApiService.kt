@@ -94,7 +94,7 @@ interface ApiService{
     /**
      * 根据item id获取相关动画
      */
-    @GET("http://192.168.0.112:5678/api/animation/related")
-    fun getRelatedAni(@Query("id") id: Long): Observable<AniBean>
+    @GET("http://192.168.0.112:5678/vod/anirelate")
+    fun getRelatedAni(@Query("vodId") vodId: Long): Observable<AniBean>
 
 }

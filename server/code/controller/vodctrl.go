@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"server/model"
 	"server/service"
 	"server/util"
 
@@ -20,7 +21,7 @@ func GetAnimation(ctx *gin.Context) {
 	typeId, typeId1, pageSize := 4, 0, 20
 
 	var aniData = make(map[string]interface{})
-	aniData["itemList"] = GetVodsList(typeId, typeId1, page, pageSize)
+	aniData["itemList"] = GetVodsList(typeId, typeId1, page, pageSize, 0)
 	aniData["typeId"] = typeId
 	aniData["typeId1"] = typeId1
 
@@ -46,7 +47,7 @@ func GetMoreAnimation(ctx *gin.Context) {
 
 	typeId, typeId1 := 4, 0
 	var aniData = make(map[string]interface{})
-	aniData["itemList"] = GetVodsList(typeId, typeId1, page, pageSize)
+	aniData["itemList"] = GetVodsList(typeId, typeId1, page, pageSize, 0)
 	aniData["typeId"] = typeId
 	aniData["typeId1"] = typeId1
 
@@ -59,8 +60,37 @@ func GetMoreAnimation(ctx *gin.Context) {
 	defer ctx.JSON(http.StatusOK, aniData)
 }
 
-func GetVodsList(typeId int, typeId1 int, page int, pageSize int) (aniList []interface{}) {
-	vodList := service.Vod.GetVods(typeId, typeId1, page, pageSize)
+func GetRelatedAnimation(ctx *gin.Context) {
+	vodID := util.GetIntParam(ctx, "vodId")
+	// typeId := util.GetIntParam(ctx, "typeId")
+	// typeId1 := util.GetIntParam(ctx, "typeId1")
+	typeId, typeId1 := 4, 0
+	page := 0
+	pageSize := 6
+
+	var aniData = make(map[string]interface{})
+	aniData["itemList"] = GetVodsList(typeId, typeId1, page, pageSize, vodID)
+	aniData["typeId"] = typeId
+	aniData["typeId1"] = typeId1
+
+	aniData["releaseTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["date"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["total"] = rand.Intn(5)
+	aniData["publishTime"] = time.Now().Unix() - int64(rand.Intn(1000))
+	aniData["count"] = rand.Intn(5)
+	aniData["nextPage"] = ""
+
+	defer ctx.JSON(http.StatusOK, aniData)
+}
+
+func GetVodsList(typeId int, typeId1 int, page int, pageSize int, vodID int) (aniList []interface{}) {
+
+	var vodList []*model.VingVod
+	if vodID != 0 {
+		vodList = service.Vod.GetRelateVods(typeId, typeId1, page, pageSize)
+	} else {
+		vodList = service.Vod.GetVods(typeId, typeId1, page, pageSize)
+	}
 
 	for i := 0; i < len(vodList); i++ {
 		var authorData = make(map[string]interface{})
@@ -72,7 +102,7 @@ func GetVodsList(typeId int, typeId1 int, page int, pageSize int) (aniList []int
 		authorData["description"] = "提供免费精彩动漫资源"
 
 		var tagList []interface{}
-		tagNum := rand.Intn(5)
+		tagNum := 1 //rand.Intn(5)
 		for i := 0; i < tagNum; i++ {
 			var tagData = make(map[string]interface{})
 			tagData["id"] = 50000 + rand.Intn(10000)
@@ -130,7 +160,7 @@ func GetVodsList(typeId int, typeId1 int, page int, pageSize int) (aniList []int
 		data["consumption"] = consumption
 
 		var aniData = make(map[string]interface{})
-		aniData["aType"] = typeId
+		aniData["aType"] = "aniSmallCard"
 		aniData["tag"] = "动画片"
 		aniData["data"] = data
 		aniList = append(aniList, aniData)
@@ -146,13 +176,13 @@ func GetPlayUrlInfo(vodPlayURL string, vodPlayFrom string, vodPlayServer string,
 		if fromList[i] == "zuidam3u8" || fromList[i] == "yjm3u8" {
 			logger.Info("url info --------- ", urlList[i])
 			playUrls = urlList[i]
-			urls := strings.Split(urlList[i], "#")
-			for j := 0; j < len(urls); j++ {
-				url := urls[j]
-				logger.Info("url ------- ", url)
-				info := strings.Split(url, "$")
-				logger.Info("集数 -- ", info[0], ", 地址--", info[1])
-			}
+			break
+			// urls := strings.Split(urlList[i], "#")
+			// for j := 0; j < len(urls); j++ {
+			// 	url := urls[j]
+			// 	info := strings.Split(url, "$")
+			// 	logger.Info("集数 -- ", info[0], ", 地址--", info[1])
+			// }
 		}
 	}
 	return

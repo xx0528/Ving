@@ -35,3 +35,16 @@ func (srv *vodService) GetVods(typeId int, typeId1 int, page int, pageSize int) 
 	}
 	return
 }
+
+func (srv *vodService) GetRelateVods(typeId int, typeId1 int, page int, pageSize int) (ret []*model.VingVod) {
+
+	logger.Info("type id --  ", typeId, ", typeId1 = ", typeId1, ", pagesize = ", pageSize)
+	if err := db.Model(&model.VingVod{}).
+		Where("`type_id` = ? AND `type_id_1` = ?", typeId, typeId1).
+		Order("rand() desc").
+		Limit(pageSize).
+		Find(&ret).Error; nil != err {
+		logger.Errorf("get vods failed: " + err.Error())
+	}
+	return
+}
