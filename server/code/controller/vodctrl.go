@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"strings"
 	"time"
 
 	"server/service"
@@ -113,10 +114,8 @@ func GetVodsList(typeId int, typeId1 int, page int, pageSize int) (aniList []int
 		data["score"] = float32(3+rand.Intn(7)) + (float32(rand.Intn(10)) / 10)
 		// data["playUrl"] = "http://ali.cdn.kaiyanapp.com/1582687191736_7a642380_1280x720.mp4?auth_key=1582881284-0-0-fe8a2d1121cb9ee797af8d67f3622a0a"
 		// data["playUrl"] = "http://meigui.qqqq-kuyun.com/20190420/2629_3ee00295/index.m3u8"
-		data["playUrl"] = vodInfo.VodPlayURL
-		data["playFrom"] = vodInfo.VodPlayFrom
-		data["playServer"] = vodInfo.VodPlayServer
-		data["playNote"] = vodInfo.VodPlayNote
+		data["playUrl"] = GetPlayUrlInfo(vodInfo.VodPlayURL, vodInfo.VodPlayFrom, vodInfo.VodPlayServer, vodInfo.VodPlayNote)
+
 		data["duration"] = 0
 		data["createTime"] = time.Now().Unix() - int64(rand.Intn(1000))
 		data["tags"] = tagList
@@ -137,5 +136,24 @@ func GetVodsList(typeId int, typeId1 int, page int, pageSize int) (aniList []int
 		aniList = append(aniList, aniData)
 	}
 
+	return
+}
+
+func GetPlayUrlInfo(vodPlayURL string, vodPlayFrom string, vodPlayServer string, vodPlayNote string) (playUrls string) {
+	fromList := strings.Split(vodPlayFrom, "$$$")
+	urlList := strings.Split(vodPlayURL, "$$$")
+	for i := 0; i < len(fromList); i++ {
+		if fromList[i] == "zuidam3u8" || fromList[i] == "yjm3u8" {
+			logger.Info("url info --------- ", urlList[i])
+			playUrls = urlList[i]
+			urls := strings.Split(urlList[i], "#")
+			for j := 0; j < len(urls); j++ {
+				url := urls[j]
+				logger.Info("url ------- ", url)
+				info := strings.Split(url, "$")
+				logger.Info("集数 -- ", info[0], ", 地址--", info[1])
+			}
+		}
+	}
 	return
 }

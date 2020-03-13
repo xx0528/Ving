@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.xx.ving.R
 import com.xx.ving.durationFormat
@@ -114,9 +115,15 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
      * 设置动画详情数据
      */
     private fun setAniDetailInfo(data: AniBean.AItem, holder: ViewHolder) {
-        data.data?.title?.let { holder.setText(R.id.tv_title, it) }
-        data.data?.title?.let { holder.setText(R.id.expandable_text, it) }
-        holder.setText(R.id.tv_tag, "#${data.data?.category} / ${durationFormat(data.data?.duration)}")
+        data.data?.name?.let { holder.setText(R.id.tv_title, it) }
+        data.data?.desc?.let { holder.setText(R.id.expandable_text, it) }
+        var duration = data.data?.duration
+        if (duration != null && duration > 0) {
+            holder.setText(R.id.tv_tag, "#${data.data?.category} / ${data.data?.area} / ${data.data?.lang} / ${data.data?.year} / ${durationFormat(data.data?.duration)}")
+        }
+        else {
+            holder.setText(R.id.tv_tag, "#${data.data?.category} / ${data.data?.area} / ${data.data?.lang} / ${data.data?.year} ")
+        }
 
 //        Logger.d("set detail info data ------")
 
@@ -143,17 +150,27 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
         /**
          * 设置嵌套水平的 RecyclerView
          */
-        val num = data.data?.aniNum ?: 10
         var selections = ArrayList<String>()
-        for (index in 1..num){
-            selections.add("第" + index.toString() + "集")
+        var ll = holder.getView<LinearLayout>(R.id.ll_section)
+        val playUrl = data.data?.playUrl?:""
+        var urlList= emptyList<String>()
+        urlList = playUrl.split("#")
+
+        for (url in urlList) {
+            selections.add(url.split("$")[0])
+        }
+
+        ll.visibility = View.VISIBLE
+
+        if (selections.size == 1) {
+            ll.visibility = View.GONE
         }
 
         val adapter = AniDetailSelectionAdapter(mContext, selections, R.layout.item_ani_selection)
         val recyclerView = holder.getView<RecyclerView>(R.id.rv_selections)
         recyclerView.layoutManager = LinearLayoutManager(mContext as Activity,LinearLayoutManager.HORIZONTAL,false)
         recyclerView.adapter = adapter
-        adapter.setData(data)
+        adapter.setData(selections, 0)
 
     }
 }

@@ -27,25 +27,13 @@ class AniDetailPresenter : BasePresenter<AniDetailContract.View>(), AniDetailCon
 //        val netType = NetworkUtil.isWifi(MyApplication.context)
         // 检测是否绑定 View
         checkViewAttached()
-        var playUrl : String? = ""
-        Logger.d("from -------%s", itemInfo.data?.playFrom)
-        var playData = itemInfo.data?.let { getPlayData(it.playUrl, it.playNote, it.playFrom, it.playServer) }
-        if (playData != null) {
-            Logger.d("play data -------")
-            for (urls in playData.values) {
-                Logger.d("play data ------- 2")
-                for (url in urls ) {
-                    Logger.d("url ---- %s", url)
-                    playUrl = url
-                }
-            }
-        }
-        playUrl = "https://cdn-yong.bejingyongjiu.com/20200214/3423_e7c45068/index.m3u8"
+        val playUrl = itemInfo.data?.playUrl?:""
+        var urlList= emptyList<String>()
+        urlList = playUrl.split("#")
+        var url = urlList[0].split("$")[1]
 //        itemInfo.data?.playUrl?.let { mRootView?.setAni(it) }
-        Logger.d("playurl --- %s", playUrl)
-        if (playUrl != null) {
-            mRootView?.setAni(playUrl)
-        }
+//        Logger.d("url -- %s", url)
+        mRootView?.setAni(url)
         //设置背景
         val backgroundUrl = (itemInfo.data?.cover?.blurred ?: "") + "/thumbnail/${DisplayManager.getScreenHeight()!! - DisplayManager.dip2px(250f)!!}x${DisplayManager.getScreenWidth()}"
         backgroundUrl.let { mRootView?.setBackground(it) }
@@ -69,40 +57,5 @@ class AniDetailPresenter : BasePresenter<AniDetailContract.View>(), AniDetailCon
                 })
 
         addSubscription(disposable)
-    }
-
-    private fun getPlayData(playUrl: String, playNote: String, playFrom: String, playServer: String) : MutableMap<String, ArrayList<String>> {
-        var fromList= emptyList<String>()
-//        var noteList= emptyList<String>()
-        var urlList= emptyList<String>()
-//        var serverList= emptyList<String>()
-        Logger.d("from str === %s", playFrom)
-        if (!playFrom.isNullOrEmpty()) {
-            fromList = playFrom.split("$$$")
-        }
-//        if (!playNote.isNullOrEmpty()) {
-//            noteList = playNote.split("$$$")
-//        }
-        if (!playUrl.isNullOrEmpty()) {
-            urlList = playUrl.split("$$$")
-        }
-//        if (!playServer.isNullOrEmpty()) {
-//            serverList = playServer.split("$$$")
-//        }
-
-        Logger.d("fromlist num -- %d", fromList.count())
-        val data = mutableMapOf<String,ArrayList<String>>()
-        for ((idx, from) in fromList.withIndex()){
-            val dataUrlList = ArrayList<String>()
-            Logger.d("urlList[idx]---- %s", urlList[idx])
-            var urls = urlList[idx].split("#")
-            for(url in urls) {
-                Logger.d("url---- %s", url)
-                var urlInfo =  url.split("$")
-                dataUrlList += urlInfo[1]
-            }
-            data[from] = dataUrlList
-        }
-        return data;
     }
 }

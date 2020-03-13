@@ -156,9 +156,9 @@ func (a *CommonAPI) GetRelatedAnimation(ctx *gin.Context) {
 
 	var dataList []interface{}
 
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 1; i++ {
 		dataList = append(dataList, a.GetTextCard("textCard"))
-		num := 3 + rand.Intn(6)
+		num := 0 + rand.Intn(2)
 		smailList := a.GetAniList("aniSmallCard", num, "", 0, iAniId)
 		for j := 0; j < len(smailList); j++ {
 			dataList = append(dataList, smailList[j])

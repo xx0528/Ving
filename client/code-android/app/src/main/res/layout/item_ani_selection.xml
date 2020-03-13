@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/tv_select_id"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="35dp"
         android:textSize="15sp"
         android:text="第100集"

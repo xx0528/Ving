@@ -250,10 +250,24 @@ class AniDetailActivity : BaseActivity(), AniDetailContract.View {
     }
 
     override fun setAni(url: String) {
-        Logger.d("playUrl:$url")
+
         mAniVideoView.setUp(url, false, "")
         //开始自动播放
-//        mAniVideoView.startPlayLogic()
+        mAniVideoView.startPlayLogic()
+    }
+    public fun setAniByIdx(idx: Int) {
+
+        val playUrl = itemData.data?.playUrl?:""
+        var urlList= emptyList<String>()
+        urlList = playUrl.split("#")
+        if (idx >= urlList.size) {
+            Logger.e("set Ani By idx  idx超出范围 idx=%d,  urls = %d", idx, urlList.size)
+            return
+        }
+        var url = urlList[idx].split("$")[1]
+        mAniVideoView.setUp(url, false, "")
+        //开始自动播放
+        mAniVideoView.startPlayLogic()
     }
 
     override fun setAniInfo(itemInfo: AniBean.AItem) {
