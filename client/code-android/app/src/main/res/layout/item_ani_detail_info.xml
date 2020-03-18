@@ -186,6 +186,22 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_common_h"
+            tools:ignore="RtlSymmetry">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_related"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="14dp"
+                android:clipToPadding="false" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

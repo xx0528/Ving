@@ -57,7 +57,7 @@ android {
     // 自定义输出配置
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "kotlinmvp_v${variant.versionName}_${variant.name}.apk"
+            outputFileName = "VING_v${variant.versionName}_${variant.name}.apk"
         }
     }
 

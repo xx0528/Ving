@@ -31,6 +31,12 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
                     position == 0 ->
                         R.layout.item_ani_detail_info
 
+                    position == 1 ->
+                        R.layout.item_ani_text_card
+
+                    position == 2 ->
+                        R.layout.item_ani_related
+
                     aniList[position].aType == "textCard" ->
                         R.layout.item_ani_text_card
 
@@ -82,32 +88,41 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
         when {
             position == 0 -> setAniDetailInfo(data, holder)
 
-            data.aType == "textCard" -> {
-                holder.setText(R.id.tv_text_card, data.data?.text!!)
+            position == 1 -> {
+                holder.setText(R.id.tv_text_card, "猜你喜欢")
                 //设置方正兰亭细黑简体
                 holder.getView<TextView>(R.id.tv_text_card).typeface =textTypeface
 
             }
 
-            data.aType == "aniSmallCard" -> {
-                with(holder) {
-                    setText(R.id.tv_title, data.data?.title!!)
-                    setText(R.id.tv_tag, "#${data.data.category} / ${durationFormat(data.data.duration)}")
-                    setImagePath(R.id.iv_ani_small_card, object : ViewHolder.HolderImageLoader(data.data.cover.detail) {
-                        override fun loadImage(iv: ImageView, path: String) {
-                            GlideApp.with(mContext)
-                                    .load(path)
-                                    .optionalTransform(GlideRoundTransform())
-                                    .placeholder(R.drawable.placeholder_banner)
-                                    .into(iv)
-                        }
-                    })
-                }
-                // 判断onItemClickRelatedVideo 并使用
-                holder.itemView.setOnClickListener { mOnItemClickRelatedAni?.invoke(data) }
+            position == 2 -> setAniRelated(holder)
 
-            }
-            else -> throw IllegalAccessException("Api 解析出错了，出现其他类型--" + data.aType)
+//            data.aType == "textCard" -> {
+//                holder.setText(R.id.tv_text_card, data.data?.text!!)
+//                //设置方正兰亭细黑简体
+//                holder.getView<TextView>(R.id.tv_text_card).typeface =textTypeface
+//
+//            }
+//
+//            data.aType == "aniSmallCard" -> {
+//                with(holder) {
+//                    setText(R.id.tv_title, data.data?.title!!)
+//                    setText(R.id.tv_tag, "#${data.data.category} / ${durationFormat(data.data.duration)}")
+//                    setImagePath(R.id.iv_ani_small_card, object : ViewHolder.HolderImageLoader(data.data.cover.detail) {
+//                        override fun loadImage(iv: ImageView, path: String) {
+//                            GlideApp.with(mContext)
+//                                    .load(path)
+//                                    .optionalTransform(GlideRoundTransform())
+//                                    .placeholder(R.drawable.placeholder_banner)
+//                                    .into(iv)
+//                        }
+//                    })
+//                }
+//                // 判断onItemClickRelatedVideo 并使用
+//                holder.itemView.setOnClickListener { mOnItemClickRelatedAni?.invoke(data) }
+//
+//            }
+//            else -> throw IllegalAccessException("Api 解析出错了，出现其他类型--" + data.aType)
         }
     }
 
@@ -126,12 +141,15 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
         }
 
 //        Logger.d("set detail info data ------")
+        val playUrl = data.data?.playUrl?:""
+        var urlList= emptyList<String>()
+        urlList = playUrl.split("#")
 
         if (data.data?.author != null) {
             with(holder) {
                 setText(R.id.tv_author_name, data.data.author.name)
                 setText(R.id.tv_author_desc, data.data.author.description)
-                setText(R.id.tv_ani_num, data.data.aniNum.toString()+"集全")
+                setText(R.id.tv_ani_num, urlList.size.toString()+"集全")
 
                 setImagePath(R.id.iv_avatar, object : ViewHolder.HolderImageLoader(data.data.author.icon) {
                     override fun loadImage(iv: ImageView, path: String) {
@@ -152,9 +170,6 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
          */
         var selections = ArrayList<String>()
         var ll = holder.getView<LinearLayout>(R.id.ll_section)
-        val playUrl = data.data?.playUrl?:""
-        var urlList= emptyList<String>()
-        urlList = playUrl.split("#")
 
         for (url in urlList) {
             selections.add(url.split("$")[0])
@@ -172,5 +187,16 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
         recyclerView.adapter = adapter
         adapter.setData(selections, 0)
 
+    }
+
+    /**
+     * 设置相关推荐
+     */
+    private fun setAniRelated(holder: ViewHolder) {
+
+        val adapter = AniRelatedAdapter(mContext, this.mData, R.layout.item_ani_small_card)
+        val recyclerView = holder.getView<RecyclerView>(R.id.rv_related)
+        recyclerView.layoutManager = LinearLayoutManager(mContext as Activity,LinearLayoutManager.HORIZONTAL,false)
+        recyclerView.adapter = adapter
     }
 }

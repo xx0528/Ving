@@ -66,7 +66,7 @@ func GetRelatedAnimation(ctx *gin.Context) {
 	// typeId1 := util.GetIntParam(ctx, "typeId1")
 	typeId, typeId1 := 4, 0
 	page := 0
-	pageSize := 6
+	pageSize := 10
 
 	var aniData = make(map[string]interface{})
 	aniData["itemList"] = GetVodsList(typeId, typeId1, page, pageSize, vodID)
