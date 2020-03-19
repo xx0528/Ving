@@ -69,6 +69,7 @@ class AniDetailAdapter(mContext: Context, aniList: ArrayList<AniBean.AItem>) :
      * 添加相关推荐等数据
      */
     fun addData(item: ArrayList<AniBean.AItem>) {
+        mData.clear()
         mData.addAll(item)
         notifyItemRangeInserted(1, item.size)
     }
