@@ -7,11 +7,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp">
+        android:layout_height="310dp">
         <ImageView
             android:id="@+id/iv_ani_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="8dp"
             android:scaleType="fitXY"
             tools:src="@drawable/shape_corner_bg" />
         <TextView

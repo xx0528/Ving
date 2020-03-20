@@ -60,7 +60,7 @@ class AniFragment: BaseFragment(), AniContract.View{
             override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
                 super.getItemOffsets(outRect, view, parent, state)
                 val position = parent?.getChildAdapterPosition(view)?:0
-                val offset = DisplayManager.dip2px(2f)!!
+                val offset = DisplayManager.dip2px(1f)!!
 
                 outRect?.set(if (position % 2 == 0) 0 else offset, offset,
                         if (position % 2 == 0) offset else 0, offset)
